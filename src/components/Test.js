@@ -25,7 +25,7 @@ const Test = (props) => {
           startInSec='10'
         >
           <source
-            src="http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest"
+            src={`${url}#t=${starttime},${endtime}`}
             type="application/vnd.ms-sstr+xml"
           />
           <p class="amp-no-js">
