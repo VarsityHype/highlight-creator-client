@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios, {post} from 'axios'
+
 import { Auth0Provider } from '../react-auth0-spa'
 
 class UploadVideo extends Component {
@@ -19,11 +20,14 @@ class UploadVideo extends Component {
     }
 
     onHandleFileUpload = () => {
+
         const url = 'http://localhost:3001/upload/'
         const data = new FormData()
         data.append('image', this.state.selectedFile)
         axios.post(url, data, {})
         .then(res => {
+            let info = JSON.parse(localStorage.user)
+            console.log(info.sub)
             console.log(res.statusText)
             console.log(res.data.uploaded_url)
         })

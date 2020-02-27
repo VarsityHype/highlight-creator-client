@@ -28,13 +28,13 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 ReactDOM.render(
+  <Provider store={store}>
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
   >
-    <Provider store={store}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={App} />
@@ -42,8 +42,8 @@ ReactDOM.render(
           <Route path="/clip" component={LoadVideo} />
         </Switch>
       </BrowserRouter>
-    </Provider>
-  </Auth0Provider>,
+  </Auth0Provider>
+  </Provider>,
   document.getElementById("root")
 );
 
