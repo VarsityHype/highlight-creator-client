@@ -1,6 +1,6 @@
 import React from "react";
 import Clips from "./Clips";
-
+import ClipsGallery from "./ClipsGallery"
 class LoadVideo extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +9,8 @@ class LoadVideo extends React.Component {
     this.state = {
       startTime: "",
       stopTime: "",
-      clipsList: []
+      clipsList: [],
+      // selectedNote: 
     };
 
     //refs
@@ -76,17 +77,34 @@ class LoadVideo extends React.Component {
           <button onClick={this.handleTrim}>Create Clip</button>
         </div>
         <h1>Your clips</h1>
-        <div>
-          {this.state.clipsList.map(clip => {
+        {console.log(this.state.clipsList)}
+        <ClipsGallery
+          clipsList={this.state.clipsList}
+          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+        />
+        {/* <div>
+          {this.state.clipsList.map(clips => {
             return (
-              <Clips
+              <div>
+                <ClipsGallery
+                  start={clips.start}
+                  stop={clips.stop}
+                  url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+                />
+                 <Clips
                 start={clip.start}
                 stop={clip.stop}
                 url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-              />
+              /> 
+              </div>
             );
           })}
-        </div>
+        </div> */}
+        <Clips
+          start={this.state.clipsList.start}
+          stop={this.state.clipsList.stop}
+          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+        />
       </div>
     );
   }

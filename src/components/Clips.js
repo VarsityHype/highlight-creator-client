@@ -13,20 +13,21 @@ class Clips extends Component {
   render() {
     return (
       <div className="Player-video-container">
-        <video
+        {/* <video
           id="vid1"
           className="azuremediaplayer amp-default-skin"
-          autoPlay={true}
+          autoPlay={false}
           controls={false}
           width="640"
           height="400"
           poster="poster.jpg"
+          preload="metadata"
         >
           <source
             src={`${this.props.url}#t=${this.props.start},${this.props.stop}`}
             type="video/mp4"
           />
-        </video>
+        </video> */}
       </div>
     );
   }
