@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class VideoPlayer extends Component {
+class Clips extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,11 +22,14 @@ class VideoPlayer extends Component {
           height="400"
           poster="poster.jpg"
         >
-          <source src={`${this.state.sourceVideo}#t=${this.state.startTime},${this.state.stopTime}`}></source>
+          <source
+            src={`${this.props.url}#t=${this.props.start},${this.props.stop}`}
+            type="video/mp4"
+          />
         </video>
       </div>
     );
   }
 }
 
-export default VideoPlayer;
+export default Clips;

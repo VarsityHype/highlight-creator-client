@@ -1,58 +1,95 @@
 import React from "react";
 import Clips from "./Clips";
-import { useEffect, useState, useRef } from "react";
 
- const LoadVideo = props => {
-  const [sourceVideo, setSourceVideo] = useState("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4");
-  const [startTime, setStartTime] = useState("");
-  const [stopTime, setStopTime] = useState("");
-  const [clip, setClip] = useState(false)
+class LoadVideo extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const videoRef = useRef("vid1")
+    //state
+    this.state = {
+      startTime: "",
+      stopTime: "",
+      clipsList: []
+    };
 
-  const handleStart = () => {
-    console.log(videoRef.current.currentTime)
-    // console.log(ref)
-    // if (ref !== null) {
-    //   setStartTime(ref.currentTime);
-    // }
-  };
-  const handleEnd = (ref) => {
-    console.log(videoRef.current.currentTime)
-    // if (ref !== null) {
-    //   setStopTime(ref.currentTime);
-  // };
-}
-  const handleClip = () => {
-    setClip(true)
+    //refs
+    this.videoRef = React.createRef();
+
+    const sourceVideo = this.videoRef.source;
+    console.log(sourceVideo);
+  }
+
+  handleVideoMounted = element => {
+    if (element !== null) {
+      element.currentTime = 30;
+    }
   };
 
-  return (
-    <div>
-      <div className="Player-video-container">
-        <video
-          id="vid1"
-          ref={videoRef}
-          className="azuremediaplayer amp-default-skin"
-          controls
-          width="640"
-          height="400"
-          poster="poster.jpg"
-        >
-          <source
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <button onClick={handleStart}>Start</button>
-        <button onClick={handleEnd}>End</button>
-        <button onClick={handleClip}>Create Clip</button>
+  handleStart = ref => {
+    this.setState({
+      ...this.state,
+      startTime: this.videoRef.current.currentTime
+    });
+  };
+
+  handleEnd = () => {
+    this.setState({
+      ...this.state,
+      stopTime: this.videoRef.current.currentTime
+    });
+  };
+
+  handleTrim = () => {
+    let newClip = {
+      start: this.state.startTime,
+      stop: this.state.stopTime
+    };
+
+    this.setState({
+      ...this.state,
+      clipsList: this.state.clipsList.concat(newClip)
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <div className="Player-video-container">
+          <video
+            id="vid1"
+            ref={this.videoRef}
+            className="azuremediaplayer amp-default-skin"
+            controls
+            width="640"
+            height="400"
+            poster="poster.jpg"
+          >
+            <source
+              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <br />
+
+          <button onClick={this.handleStart}>Start</button>
+          <button onClick={this.handleEnd}>End</button>
+          <button onClick={this.handleTrim}>Create Clip</button>
+        </div>
+        <h1>Your clips</h1>
+        <div>
+          {this.state.clipsList.map(clip => {
+            return (
+              <Clips
+                start={clip.start}
+                stop={clip.stop}
+                url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+              />
+            );
+          })}
+        </div>
       </div>
-      <div className="video-clips-container">
-        {clip ? <Clips sourceVideo={sourceVideo} startTime={startTime} stopTime={stopTime} /> : null}
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default LoadVideo
+export default LoadVideo;

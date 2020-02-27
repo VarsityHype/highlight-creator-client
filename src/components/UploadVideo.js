@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios, {post} from 'axios'
+import { Auth0Provider } from '../react-auth0-spa'
 
 class UploadVideo extends Component {
 
@@ -13,18 +14,18 @@ class UploadVideo extends Component {
     onHandleChange = (e) => {
         this.setState({
             selectedFile: e.target.files[0],
-            loaded: 0,
-            [e.target.name]: e.target.value
+            loaded: 0
         })
     }
 
     onHandleFileUpload = () => {
-        const url = 'http://localhost:3001/video/upload'
+        const url = 'http://localhost:3001/upload/'
         const data = new FormData()
-        data.append('file', this.state.selectedFile)
+        data.append('image', this.state.selectedFile)
         axios.post(url, data, {})
         .then(res => {
             console.log(res.statusText)
+            console.log(res.data.uploaded_url)
         })
     }
     
@@ -37,6 +38,7 @@ class UploadVideo extends Component {
                 <h1>Upload a Video</h1>
             </div>
             <div>
+                <p></p>
                 <input type="text" name="title" placeholder="title" onChange={this.onHandleChange} />
                 <input type="text" name="description" placeholder="description" onChange={this.onHandleChange} />
                 <input type="hidden" name="title" placeholder="title" onChange={this.onHandleChange} value="uploader_id" />
