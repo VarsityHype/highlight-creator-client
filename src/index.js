@@ -10,7 +10,7 @@ import reducer from "./store/reducer";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Test from "./components/Test";
-import ClipTest from "./components/Test";
+import LoadVideo from "./components/LoadVideo";
 
 // A function that routes the user to the right place
 // after login
@@ -39,7 +39,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
-          <Route path="/cliptest" component={ClipTest} />
+          <Route path="/clip" component={LoadVideo} />
         </Switch>
       </BrowserRouter>
     </Provider>

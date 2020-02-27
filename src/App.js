@@ -3,6 +3,7 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import { useAuth0 } from "./react-auth0-spa";
+import VideoPlayer from "./components/VideoPlayer";
 
 function App() {
   const { loading } = useAuth0();
@@ -16,6 +17,7 @@ function App() {
       <header>
         <NavBar />
       </header>
+      <VideoPlayer />
     </div>
   );
 }
