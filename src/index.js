@@ -10,6 +10,7 @@ import reducer from "./store/reducer";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Test from "./components/Test";
+import Clips from "./components/Clips";
 import LoadVideo from "./components/LoadVideo";
 
 // A function that routes the user to the right place
@@ -39,7 +40,8 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
-          <Route path="/clip" component={LoadVideo} />
+          <Route path="/clip" component={Clips} />
+          <Route path="/load" component={LoadVideo} />
         </Switch>
       </BrowserRouter>
     </Provider>
