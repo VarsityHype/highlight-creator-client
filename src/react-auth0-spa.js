@@ -35,10 +35,31 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+        // if(user) {
+        //   let cred = {
+        //       name: `${user.name}`,
+        //       email: `${user.email}`,
+        //       password: `${user.sub}`
+        //       };
+        //       fetch('http://localhost:9000/auth0', {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(cred)
+        //       }).then(response => response.json())
+        //       .then(json => {
+                  
+                     
+                  
+        //         console.log(json)
+        //       })
+        //   }
       }
 
-      setLoading(false);
+       setLoading(false);
     };
+    
     initAuth0();
     // eslint-disable-next-line
   }, []);
@@ -56,10 +77,9 @@ export const Auth0Provider = ({
     setUser(user);
     setIsAuthenticated(true);
   };
-
   const handleRedirectCallback = async () => {
     setLoading(true);
-    await auth0Client.handleRedirectCallback();
+    // await auth0Client.handleRedirectCallback();
     const user = await auth0Client.getUser();
     setLoading(false);
     setIsAuthenticated(true);
