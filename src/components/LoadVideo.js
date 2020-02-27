@@ -1,25 +1,38 @@
 import React from "react";
-import VideoPlayer from "../components/VideoPlayer";
-import { useEffect, useState } from "react";
+import Clips from "./Clips";
+import { useEffect, useState, useRef } from "react";
 
-export default function LoadVideo(props) {
-  const [sourceVideo, setSourceVideo] = useState("");
+ const LoadVideo = props => {
+  const [sourceVideo, setSourceVideo] = useState("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4");
   const [startTime, setStartTime] = useState("");
   const [stopTime, setStopTime] = useState("");
+  const [clip, setClip] = useState(false)
+
+  const videoRef = useRef("vid1")
 
   const handleStart = () => {
-    setStartTime("5");
+    console.log(videoRef.current.currentTime)
+    // console.log(ref)
+    // if (ref !== null) {
+    //   setStartTime(ref.currentTime);
+    // }
   };
-  const handleEnd = () => {
-    setStartTime("7");
+  const handleEnd = (ref) => {
+    console.log(videoRef.current.currentTime)
+    // if (ref !== null) {
+    //   setStopTime(ref.currentTime);
+  // };
+}
+  const handleClip = () => {
+    setClip(true)
   };
-  const handleClip = () => {};
 
   return (
     <div>
       <div className="Player-video-container">
         <video
           id="vid1"
+          ref={videoRef}
           className="azuremediaplayer amp-default-skin"
           controls
           width="640"
@@ -35,7 +48,11 @@ export default function LoadVideo(props) {
         <button onClick={handleEnd}>End</button>
         <button onClick={handleClip}>Create Clip</button>
       </div>
-      <div className="video-clips-container"></div>
+      <div className="video-clips-container">
+        {clip ? <Clips sourceVideo={sourceVideo} startTime={startTime} stopTime={stopTime} /> : null}
+      </div>
     </div>
   );
 }
+
+export default LoadVideo

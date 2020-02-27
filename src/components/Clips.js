@@ -22,7 +22,7 @@ class VideoPlayer extends Component {
           height="400"
           poster="poster.jpg"
         >
-          {/* <source src={`${URL}#t=${startTime}, ${stopTime}`} type="video/mp4" /> */}
+          <source src={`${this.state.sourceVideo}#t=${this.state.startTime},${this.state.stopTime}`}></source>
         </video>
       </div>
     );
