@@ -5,9 +5,6 @@ class LoadVideo extends React.Component {
   constructor(props) {
     super(props);
 
-    //refs
-    this.videoRef = React.createRef();
-
     //state
     this.state = {
       startTime: "",
@@ -72,6 +69,8 @@ class LoadVideo extends React.Component {
               type="video/mp4"
             />
           </video>
+          <br />
+
           <button onClick={this.handleStart}>Start</button>
           <button onClick={this.handleEnd}>End</button>
           <button onClick={this.handleTrim}>Create Clip</button>
