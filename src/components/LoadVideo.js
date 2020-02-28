@@ -1,6 +1,6 @@
 import React from "react";
-import Clips from "./Clips";
-
+import ClipPreview from "./ClipPreview";
+import ClipsGallery from "./ClipsGallery"
 class LoadVideo extends React.Component {
   constructor(props) {
     super(props);
@@ -8,23 +8,18 @@ class LoadVideo extends React.Component {
     //state
     this.state = {
       startTime: "",
-      stopTime: "",
-      clipsList: []
+      endTime: "",
+      clipsList: [],
+      selectedClip: null 
     };
 
     //refs
     this.videoRef = React.createRef();
 
     const sourceVideo = this.videoRef.source;
-    //console.log(sourceVideo);
   }
 
-  handleVideoMounted = element => {
-    if (element !== null) {
-      element.currentTime = 30;
-    }
-  };
-
+  // Sets the beginning of the clip with the "Start" button
   handleStart = ref => {
     this.setState({
       ...this.state,
@@ -32,17 +27,19 @@ class LoadVideo extends React.Component {
     });
   };
 
+  // Sets the end of the clip with the "End" button
   handleEnd = () => {
     this.setState({
       ...this.state,
-      stopTime: this.videoRef.current.currentTime
+      endTime: this.videoRef.current.currentTime
     });
   };
 
+  // Creates the clip and sets it in state
   handleTrim = () => {
     let newClip = {
       start: this.state.startTime,
-      stop: this.state.stopTime
+      stop: this.state.endTime
     };
 
     this.setState({
@@ -50,6 +47,14 @@ class LoadVideo extends React.Component {
       clipsList: this.state.clipsList.concat(newClip)
     });
   };
+
+  // Selects a clip to display in the Clip component
+  selectClip = (clip) => {
+    this.setState({
+      ...this.state,
+      selectedClip: {clip}
+    })
+  }
 
   render() {
     return (
@@ -76,17 +81,18 @@ class LoadVideo extends React.Component {
           <button onClick={this.handleTrim}>Create Clip</button>
         </div>
         <h1>Your clips</h1>
-        <div>
-          {this.state.clipsList.map(clip => {
-            return (
-              <Clips
-                start={clip.start}
-                stop={clip.stop}
-                url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-              />
-            );
-          })}
-        </div>
+    
+        <ClipsGallery
+          clipsList={this.state.clipsList}
+          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          selectClip={this.selectClip}
+        />
+
+        {this.state.selectedClip ? <ClipPreview
+          selectedClip={this.state.selectedClip}
+          sourceUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+        /> : null}
+
       </div>
     );
   }
