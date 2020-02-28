@@ -1,13 +1,18 @@
 import React  from 'react'
 
 const ClipsGallery = (props) => {
-    console.log(props)
+
+   const selectClip = clip => {
+     props.selectClip(clip);
+   };
+
     return (
       <div>
         
-        {props.clipsList.map(clips => {
+        {props.clipsList.map((clip, index) => {
             return (
               <video
+                key={index}
                 id="vid1"
                 className="azuremediaplayer amp-default-skin"
                 autoPlay={false}
@@ -16,9 +21,10 @@ const ClipsGallery = (props) => {
                 height="200"
                 poster="poster.jpg"
                 preload="metadata"
+                onClick={() => selectClip(clip)}
               >
                 <source
-                  src={`${props.url}#t=${clips.start},${clips.stop}`}
+                  src={`${props.url}#t=${clip.start},${clip.stop}`}
                   type="video/mp4"
                 />
               </video>
@@ -26,6 +32,6 @@ const ClipsGallery = (props) => {
         })}
       </div>
     );
-}
 
+  }
 export default ClipsGallery
