@@ -35,6 +35,7 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+        localStorage.setItem('user', JSON.stringify(user))
         // if(user) {
         //   let cred = {
         //       name: `${user.name}`,

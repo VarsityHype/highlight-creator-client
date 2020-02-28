@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
+import UploadVideo from "./components/UploadVideo"
 import { useAuth0 } from "./react-auth0-spa";
 
 import LoadVideo from "./components/LoadVideo";
@@ -17,6 +18,8 @@ function App() {
     <div className="App">
 
       <LoadVideo />
+      <NavBar />
+      <UploadVideo />
 
     </div>
   );
