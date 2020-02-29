@@ -12,6 +12,11 @@ import { Provider } from "react-redux";
 import Test from "./components/Test";
 import ClipPreview from "./components/ClipPreview";
 import LoadVideo from "./components/LoadVideo";
+import NavBar from "./components/NavBar"
+import UploadVideo from "./components/UploadVideo";
+
+// CSS IMPORTS
+import './css/AppBar.css'
 
 // A function that routes the user to the right place
 // after login
@@ -37,11 +42,13 @@ ReactDOM.render(
     onRedirectCallback={onRedirectCallback}
   >
       <BrowserRouter>
+      <NavBar />
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
           <Route path="/clip" component={ClipPreview} />
           <Route path="/load" component={LoadVideo} />
+          <Route path="/upload" component={UploadVideo} />
         </Switch>
       </BrowserRouter>
   </Auth0Provider>
