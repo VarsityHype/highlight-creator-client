@@ -27,7 +27,7 @@ const ClipsGallery = (props) => {
                   poster="poster.jpg"
                   preload="metadata"
                   onClick={() => selectClip(clip)}
-                  src={`${props.url}#t=${clip.start},${clip.stop}`}
+                  src={`${props.url}#t=${clip.start},${clip.end}`}
                 >
                   <source type="video/mp4" />
                 </video>

@@ -50,7 +50,7 @@ class LoadVideo extends React.Component {
     let newClip = {
       clipId: this.uuidv4(),
       start: this.state.startTime,
-      stop: this.state.endTime
+      end: this.state.endTime
     };
 
     this.setState({
@@ -77,8 +77,8 @@ class LoadVideo extends React.Component {
     }, () => {console.log(this.state.clipsList)})
   }
 
-  exportClip = () => {
-    axios.post('http://localhost:8080/exportClips', {
+  saveClipToDatabase = () => {
+    axios.post('http://localhost:8080/saveClip', {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
     })

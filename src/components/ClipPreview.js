@@ -16,7 +16,7 @@ class ClipPreview extends Component {
       sourceUrl: this.props.sourceUrl,
       selectedClip: this.props.selectedClip,
       startTime: this.props.selectedClip.clip.start,
-      endTime: this.props.selectedClip.clip.stop
+      endTime: this.props.selectedClip.clip.end
     });
   }
 
@@ -26,7 +26,7 @@ class ClipPreview extends Component {
         sourceUrl: this.props.sourceUrl,
         selectedClip: this.props.selectedClip,
         startTime: this.props.selectedClip.clip.start,
-        endTime: this.props.selectedClip.clip.stop
+        endTime: this.props.selectedClip.clip.end
       });
     }
   }
