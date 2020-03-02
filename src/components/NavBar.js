@@ -1,20 +1,14 @@
-// src/components/NavBar.js
-
 import React from "react";
-import { useAuth0 } from "../react-auth0-spa";
+import AppBar from './AppBar'
 
 const NavBar = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-  return (
-    <div>
-      {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})}>Log in</button>
-      )}
+  return (<>
 
-      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
-    </div>
-  );
-};
+      <AppBar />
+
+    </>)
+
+}
 
 export default NavBar;
