@@ -76,7 +76,7 @@ class Clips extends React.Component {
     });
   };
 
-  deleteClip = clip => {
+  handleDeleteClip = clip => {
     const clipId = clip.clipId;
     console.log(clipId);
     this.setState(
@@ -134,7 +134,7 @@ class Clips extends React.Component {
               clipsList={this.state.clipsList}
               url={this.state.videoUrl}
               selectClip={this.selectClip}
-              deleteClip={this.deleteClip}
+              handleDeleteClip={this.handleDeleteClip}
             />
           </div>
         </div>

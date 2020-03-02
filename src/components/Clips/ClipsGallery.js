@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -30,13 +30,15 @@ const useStyles = makeStyles(theme => ({
 
 const ClipsGallery = props => {
   const classes = useStyles();
+  // const deleteRef = useRef(null)
+
   const selectClip = clip => {
     props.selectClip(clip);
   };
 
-  const handleDeleteClip = clip => {
-    console.log("hi");
-    props.deleteClip(clip);
+  const handleDeleteClip = (clip) => {
+    console.log("hi")
+    props.handleDeleteClip(clip);
   };
   return (
     <div className={classes.root}>
@@ -66,7 +68,7 @@ const ClipsGallery = props => {
                 <IconButton
                   aria-label={`info about LABEL GOES HERE`}
                   className={classes.icon}
-                  onClick={handleDeleteClip}
+                  onClick={() => handleDeleteClip(clip)}
                 >
                   <HighlightOffIcon />
                 </IconButton>
