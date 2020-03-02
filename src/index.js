@@ -10,8 +10,7 @@ import reducer from "./store/reducer";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Test from "./components/Test";
-import ClipPreview from "./components/ClipPreview";
-import LoadVideo from "./components/LoadVideo";
+import Clip from "./components/Clips/Clip";
 import NavBar from "./components/NavBar"
 import UploadVideo from "./components/UploadVideo";
 
@@ -46,7 +45,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
-          <Route path="/load" component={LoadVideo} />
+          <Route path="/load" component={Clip} />
           <Route path="/upload" component={UploadVideo} />
         </Switch>
       </BrowserRouter>

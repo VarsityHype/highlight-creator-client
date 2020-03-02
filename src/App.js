@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa";
 
-import LoadVideo from "./components/LoadVideo";
+import Clip from "./components/Clips/Clip";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <div>
 
       <h1>VarsityHype</h1>
-      <LoadVideo />
+      <Clip />
 
     </div>
   );

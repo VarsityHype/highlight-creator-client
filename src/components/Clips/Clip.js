@@ -2,17 +2,18 @@ import React from "react";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 import axios from 'axios'
-class LoadVideo extends React.Component {
+class Clips extends React.Component {
   constructor(props) {
     super(props);
 
     //state
     this.state = {
-      videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      videoUrl:
+        "https://astorageserver.blob.core.windows.net/video-storagea/8911870163918805-8861367419101975-Cute%20Cat%20-%203092.mp4",
       startTime: "",
       endTime: "",
       clipsList: [],
-      selectedClip: null 
+      selectedClip: null
     };
 
     //refs
@@ -61,24 +62,25 @@ class LoadVideo extends React.Component {
   };
 
   // Selects a clip to display in the Clip component
-  selectClip = (clip) => {
+  selectClip = clip => {
     this.setState({
       ...this.state,
-      selectedClip: {clip}
-    })
-  }
+      selectedClip: { clip }
+    });
+  };
 
   deleteClip = (clip) => {
     const clipId = clip.clipId
     console.log(clipId)
     this.setState({
       ...this.state,
-      clipsList: this.state.clipsList.filter(_clip => _clip.clipId !== clipId)
+      clipsList: this.state.clipsList.filter(_clip => _clip.clipId !== clipId),
+      selectedClip: null
     }, () => {console.log(this.state.clipsList)})
   }
 
-  saveClipToDatabase = () => {
-    axios.post('http://localhost:8080/saveClip', {
+  handleSave = () => {
+    axios.post('http://localhost:3001/saveClip', {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
     })
@@ -92,13 +94,14 @@ class LoadVideo extends React.Component {
             ref={this.videoRef}
             className="azuremediaplayer amp-default-skin"
             controls
+            autoPlay
             width="640"
             height="400"
             poster="poster.jpg"
           >
             <source
               src={this.state.videoUrl}
-              type="video/mp4"
+              // type="video/mp4"
             />
           </video>
           <br />
@@ -106,10 +109,10 @@ class LoadVideo extends React.Component {
           <button onClick={this.handleStart}>Start</button>
           <button onClick={this.handleEnd}>End</button>
           <button onClick={this.handleTrim}>Create Clip</button>
-          <button onClick={this.handleExport}>Export Clip</button>
+          <button onClick={this.handleSave}>Export Clip</button>
         </div>
         <h1>Your clips</h1>
-    
+
         <ClipsGallery
           clipsList={this.state.clipsList}
           url={this.state.videoUrl}
@@ -117,14 +120,15 @@ class LoadVideo extends React.Component {
           deleteClip={this.deleteClip}
         />
 
-        {this.state.selectedClip ? <ClipPreview
-          selectedClip={this.state.selectedClip}
-          sourceUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-        /> : null}
-
+        {this.state.selectedClip ? (
+          <ClipPreview
+            selectedClip={this.state.selectedClip}
+            sourceUrl={this.state.videoUrl}
+          />
+        ) : null}
       </div>
     );
   }
 }
 
-export default LoadVideo;
+export default Clips;
