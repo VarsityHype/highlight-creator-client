@@ -14,7 +14,7 @@ import ClipPreview from "./components/ClipPreview";
 import LoadVideo from "./components/LoadVideo";
 import NavBar from "./components/NavBar"
 import UploadVideo from "./components/UploadVideo";
-import DropZone from "./components/DropZone"
+import Video from "./components/Video"
 
 // CSS IMPORTS
 import './css/AppBar.css'
@@ -50,7 +50,7 @@ ReactDOM.render(
           <Route path="/clip" component={ClipPreview} />
           <Route path="/load" component={LoadVideo} />
           <Route path="/upload" component={UploadVideo} />
-          <Route path="/drop" component={DropZone} />
+          <Route path="/video" component={Video} />
         </Switch>
       </BrowserRouter>
   </Auth0Provider>

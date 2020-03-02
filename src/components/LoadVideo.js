@@ -15,7 +15,6 @@ class LoadVideo extends React.Component {
 
     //refs
     this.videoRef = React.createRef();
-
     const sourceVideo = this.videoRef.source;
   }
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
-import DropZone from './DropZone'
 import axios, {post} from 'axios'
 
 class UploadVideo extends Component {
@@ -61,6 +60,14 @@ class UploadVideo extends Component {
             <div>
                 <h1>Upload a Video</h1>
             </div>
+            <form autoComplete="on">
+                <div>
+                    <TextField type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
+                    <TextField type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
+                    <input type="file" onChange={this.onHandleChange} />
+                    <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
+                </div>
+            </form>
 
 
         </>)
@@ -69,18 +76,3 @@ class UploadVideo extends Component {
 }
 
 export default UploadVideo
-
-
-/*
-            <form autoComplete="on">
-                <div>
-                    <TextField type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
-                    <TextField type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
-                    <div>
-                        <DropZone />
-                    </div>
-                    <input type="file" onChange={this.onHandleChange} />
-                    <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
-                </div>
-            </form>
-*/
