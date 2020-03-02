@@ -1,12 +1,15 @@
 import React from "react";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
-class LoadVideo extends React.Component {
+import axios from 'axios'
+class Clips extends React.Component {
   constructor(props) {
     super(props);
 
     //state
     this.state = {
+      videoUrl:
+        "https://astorageserver.blob.core.windows.net/video-storagea/8911870163918805-8861367419101975-Cute%20Cat%20-%203092.mp4",
       startTime: "",
       endTime: "",
       clipsList: [],
@@ -35,17 +38,27 @@ class LoadVideo extends React.Component {
     });
   };
 
+  // Randomly generates an id
+   uuidv4 = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
   // Creates the clip and sets it in state
   handleTrim = () => {
     let newClip = {
+      clipId: this.uuidv4(),
       start: this.state.startTime,
-      stop: this.state.endTime
+      end: this.state.endTime
     };
 
     this.setState({
       ...this.state,
       clipsList: this.state.clipsList.concat(newClip)
-    });
+    }, () => {console.log(this.state.clipsList)});
+  
   };
 
   // Selects a clip to display in the Clip component
@@ -56,6 +69,22 @@ class LoadVideo extends React.Component {
     });
   };
 
+  deleteClip = (clip) => {
+    const clipId = clip.clipId
+    console.log(clipId)
+    this.setState({
+      ...this.state,
+      clipsList: this.state.clipsList.filter(_clip => _clip.clipId !== clipId),
+      selectedClip: null
+    }, () => {console.log(this.state.clipsList)})
+  }
+
+  handleSave = () => {
+    axios.post('http://localhost:3001/saveClip', {
+      sourceVideo: this.state.videoUrl,
+      clipsList: this.state.clipsList
+    })
+  }
   render() {
     return (
       <div>
@@ -65,13 +94,14 @@ class LoadVideo extends React.Component {
             ref={this.videoRef}
             className="azuremediaplayer amp-default-skin"
             controls
+            autoPlay
             width="640"
             height="400"
             poster="poster.jpg"
           >
             <source
-              src="https://astorageserver.blob.core.windows.net/video-storagea/2436622728986777-test.mp4"
-              type="video/mp4"
+              src={this.state.videoUrl}
+              // type="video/mp4"
             />
           </video>
           <br />
@@ -79,19 +109,21 @@ class LoadVideo extends React.Component {
           <button onClick={this.handleStart}>Start</button>
           <button onClick={this.handleEnd}>End</button>
           <button onClick={this.handleTrim}>Create Clip</button>
+          <button onClick={this.handleSave}>Export Clip</button>
         </div>
         <h1>Your clips</h1>
 
         <ClipsGallery
           clipsList={this.state.clipsList}
-          url="https://astorageserver.blob.core.windows.net/video-storagea/2436622728986777-test.mp4"
+          url={this.state.videoUrl}
           selectClip={this.selectClip}
+          deleteClip={this.deleteClip}
         />
 
         {this.state.selectedClip ? (
           <ClipPreview
             selectedClip={this.state.selectedClip}
-            sourceUrl="https://astorageserver.blob.core.windows.net/video-storagea/2436622728986777-test.mp4"
+            sourceUrl={this.state.videoUrl}
           />
         ) : null}
       </div>
@@ -99,4 +131,4 @@ class LoadVideo extends React.Component {
   }
 }
 
-export default LoadVideo;
+export default Clips;
