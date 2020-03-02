@@ -40,8 +40,8 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
-          <Route path="/clip" component={ClipPreview} />
-          <Route path="/load" component={LoadVideo} />
+          <Route path="/clip" component={LoadVideo} />
+          {/* <Route path="/load" component={LoadVideo} /> */}
         </Switch>
       </BrowserRouter>
   </Auth0Provider>

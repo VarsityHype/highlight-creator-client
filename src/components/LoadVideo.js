@@ -1,12 +1,14 @@
 import React from "react";
 import ClipPreview from "./ClipPreview";
-import ClipsGallery from "./ClipsGallery"
+import ClipsGallery from "./ClipsGallery";
+import axios from 'axios'
 class LoadVideo extends React.Component {
   constructor(props) {
     super(props);
 
     //state
     this.state = {
+      videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
       startTime: "",
       endTime: "",
       clipsList: [],
@@ -35,9 +37,18 @@ class LoadVideo extends React.Component {
     });
   };
 
+  // Randomly generates an id
+   uuidv4 = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
   // Creates the clip and sets it in state
   handleTrim = () => {
     let newClip = {
+      clipId: this.uuidv4(),
       start: this.state.startTime,
       stop: this.state.endTime
     };
@@ -45,7 +56,8 @@ class LoadVideo extends React.Component {
     this.setState({
       ...this.state,
       clipsList: this.state.clipsList.concat(newClip)
-    });
+    }, () => {console.log(this.state.clipsList)});
+  
   };
 
   // Selects a clip to display in the Clip component
@@ -56,6 +68,21 @@ class LoadVideo extends React.Component {
     })
   }
 
+  deleteClip = (clip) => {
+    const clipId = clip.clipId
+    console.log(clipId)
+    this.setState({
+      ...this.state,
+      clipsList: this.state.clipsList.filter(_clip => _clip.clipId !== clipId)
+    }, () => {console.log(this.state.clipsList)})
+  }
+
+  exportClip = () => {
+    axios.post('http://localhost:8080/exportClips', {
+      sourceVideo: this.state.videoUrl,
+      clipsList: this.state.clipsList
+    })
+  }
   render() {
     return (
       <div>
@@ -70,7 +97,7 @@ class LoadVideo extends React.Component {
             poster="poster.jpg"
           >
             <source
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+              src={this.state.videoUrl}
               type="video/mp4"
             />
           </video>
@@ -79,13 +106,15 @@ class LoadVideo extends React.Component {
           <button onClick={this.handleStart}>Start</button>
           <button onClick={this.handleEnd}>End</button>
           <button onClick={this.handleTrim}>Create Clip</button>
+          <button onClick={this.handleExport}>Export Clip</button>
         </div>
         <h1>Your clips</h1>
     
         <ClipsGallery
           clipsList={this.state.clipsList}
-          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          url={this.state.videoUrl}
           selectClip={this.selectClip}
+          deleteClip={this.deleteClip}
         />
 
         {this.state.selectedClip ? <ClipPreview
