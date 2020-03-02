@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
-import DropZone from './DropZone'
+import {DropzoneArea} from 'material-ui-dropzone'
 import axios, {post} from 'axios'
+ 
+class DropZone extends Component{
 
-class UploadVideo extends Component {
-
-    constructor(props) {
+  constructor(props) {
         super(props)
         this.state = {
             selectedFile: null,
@@ -14,9 +14,9 @@ class UploadVideo extends Component {
         } 
     }
 
-    onHandleChange = (e) => {
+    onHandleChange = (selectedFile) => {
         this.setState({
-            selectedFile: e.target.files[0],
+            selectedFile: selectedFile
         })
     }
 
@@ -32,7 +32,9 @@ class UploadVideo extends Component {
         const description = this.state.description
         const url = 'http://localhost:3001/upload/'
         const data = new FormData()
-        data.append('image', this.state.selectedFile)
+        data.append('originalName', this.state.selectedFile)
+        console.log(this.state.selectedFile)
+        console.log(data)
         axios.post(url, data, {})
         .then(res => {
             let info = JSON.parse(localStorage.user)
@@ -44,43 +46,32 @@ class UploadVideo extends Component {
                 description: description
                 };
                 fetch('http://localhost:3001/upload/uploaded', {
-                  method: 'POST',
-                  headers: {
+                method: 'POST',
+                headers: {
                     'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(video)
+                },
+                body: JSON.stringify(video)
                 }).then(response => response.json())
             
         })
     }
 
-    render() {
+  render() {
 
-        return(<>
+    return (<>
 
-            <div>
-                <h1>Upload a Video</h1>
-            </div>
+        <form>
+            <TextField type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
+            <TextField type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
+            <DropzoneArea 
+                onChange={this.onHandleChange} maxFileSize={999999999999} dropzoneText={'Drag and drop a video file here or click'} acceptedFiles={['video/mp4']}
+            />
+            <h1><hr></hr></h1>
+            <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
+        </form>
 
-
-        </>)
-
-    }
-}
-
-export default UploadVideo
-
-
-/*
-            <form autoComplete="on">
-                <div>
-                    <TextField type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
-                    <TextField type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
-                    <div>
-                        <DropZone />
-                    </div>
-                    <input type="file" onChange={this.onHandleChange} />
-                    <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
-                </div>
-            </form>
-*/
+    </>)  
+  }
+} 
+ 
+export default DropZone;
