@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import TextField from '@material-ui/core/TextField';
 import axios, {post} from 'axios'
 
 class UploadVideo extends Component {
@@ -35,7 +36,6 @@ class UploadVideo extends Component {
         .then(res => {
             let info = JSON.parse(localStorage.user)
             let uploader_id = info.sub
-            
             let video = {
                 uploader_id: `${uploader_id}`,
                 azure_url: `${res.data.uploaded_url}`,
@@ -52,23 +52,24 @@ class UploadVideo extends Component {
             
         })
     }
-    
 
     render() {
 
         return(<>
-        
+
             <div>
                 <h1>Upload a Video</h1>
             </div>
-            <div>
-                <p></p>
-                <input type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
-                <input type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
-                <input type="file" onChange={this.onHandleChange} />
-                <button type="button" onClick={this.onHandleFileUpload}>Upload</button>
-            </div>
-        
+            <form autoComplete="on">
+                <div>
+                    <TextField type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
+                    <TextField type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
+                    <input type="file" onChange={this.onHandleChange} />
+                    <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
+                </div>
+            </form>
+
+
         </>)
 
     }

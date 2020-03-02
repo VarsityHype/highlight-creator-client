@@ -1,6 +1,6 @@
 import React from "react";
 import ClipPreview from "./ClipPreview";
-import ClipsGallery from "./ClipsGallery"
+import ClipsGallery from "./ClipsGallery";
 class LoadVideo extends React.Component {
   constructor(props) {
     super(props);
@@ -10,12 +10,12 @@ class LoadVideo extends React.Component {
       startTime: "",
       endTime: "",
       clipsList: [],
-      selectedClip: null 
+      selectedClip: null
     };
 
     //refs
     this.videoRef = React.createRef();
-
+    
     const sourceVideo = this.videoRef.source;
   }
 
@@ -49,12 +49,12 @@ class LoadVideo extends React.Component {
   };
 
   // Selects a clip to display in the Clip component
-  selectClip = (clip) => {
+  selectClip = clip => {
     this.setState({
       ...this.state,
-      selectedClip: {clip}
-    })
-  }
+      selectedClip: { clip }
+    });
+  };
 
   render() {
     return (
@@ -70,7 +70,7 @@ class LoadVideo extends React.Component {
             poster="poster.jpg"
           >
             <source
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+              src="https://astorageserver.blob.core.windows.net/video-storagea/2436622728986777-test.mp4"
               type="video/mp4"
             />
           </video>
@@ -81,18 +81,19 @@ class LoadVideo extends React.Component {
           <button onClick={this.handleTrim}>Create Clip</button>
         </div>
         <h1>Your clips</h1>
-    
+
         <ClipsGallery
           clipsList={this.state.clipsList}
-          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          url="https://astorageserver.blob.core.windows.net/video-storagea/2436622728986777-test.mp4"
           selectClip={this.selectClip}
         />
 
-        {this.state.selectedClip ? <ClipPreview
-          selectedClip={this.state.selectedClip}
-          sourceUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-        /> : null}
-
+        {this.state.selectedClip ? (
+          <ClipPreview
+            selectedClip={this.state.selectedClip}
+            sourceUrl="https://astorageserver.blob.core.windows.net/video-storagea/2436622728986777-test.mp4"
+          />
+        ) : null}
       </div>
     );
   }

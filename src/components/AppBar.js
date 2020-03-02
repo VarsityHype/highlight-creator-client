@@ -209,6 +209,9 @@ export default function PrimarySearchAppBar() {
               <a className="menu-item-a" href="/playlists">Playlists</a>
             </MenuItem>
             <MenuItem>
+              <a className="menu-item-a" href="/videos">Videos</a>
+            </MenuItem>
+            <MenuItem>
               <a className="menu-item-a" href="/upload">Upload</a>
             </MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
