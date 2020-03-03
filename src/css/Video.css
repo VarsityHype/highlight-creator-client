@@ -1,0 +1,24 @@
+.video-div {
+    background-color: whitesmoke;
+    margin: 2rem;
+}
+
+.video-div-inner {
+    margin: 1rem;
+}
+
+.video-page-video {
+    margin: 1rem;
+}
+
+.title-description-div {
+    margin: 1rem;
+}
+
+.h1-title-div {
+    background-color: turquoise;
+}
+
+.h1-title-div:hover {
+    cursor: pointer;
+}

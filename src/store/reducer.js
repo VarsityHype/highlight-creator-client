@@ -1,21 +1,18 @@
 const initialState = {
-    test: false
+  videoUrl: '',
+  videoTitle: ''
 }
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'TEST_SUCCESS':
-        return {
-          ...state,
-          test: !state.test
-        };
-      default: {
-        return state;
-      }
-    }
 
-    
-
+  if (action.type === 'VIDEO_INFO_SAVED') {
+    return {
+      ...state,
+      videoUrl: action.videoUrl,
+      videoTitle: action.videoTitle
     }
+  }
+
+}
 
 export default reducer
