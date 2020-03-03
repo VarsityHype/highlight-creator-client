@@ -1,0 +1,7 @@
+.flex-container {
+  display: flex;
+}
+
+.player-video-container {
+  margin-right: 1rem;
+}

@@ -1,7 +1,9 @@
 import React from "react";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
-import axios from 'axios'
+import axios from "axios";
+import "../../css/Clip.css";
+
 class Clips extends React.Component {
   constructor(props) {
     super(props);
@@ -39,12 +41,13 @@ class Clips extends React.Component {
   };
 
   // Randomly generates an id
-   uuidv4 = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
+  uuidv4 = () => {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+      var r = (Math.random() * 16) | 0,
+        v = c == "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  };
 
   // Creates the clip and sets it in state
   handleTrim = () => {
@@ -54,11 +57,15 @@ class Clips extends React.Component {
       end: this.state.endTime
     };
 
-    this.setState({
-      ...this.state,
-      clipsList: this.state.clipsList.concat(newClip)
-    }, () => {console.log(this.state.clipsList)});
-  
+    this.setState(
+      {
+        ...this.state,
+        clipsList: this.state.clipsList.concat(newClip)
+      },
+      () => {
+        console.log(this.state.clipsList);
+      }
+    );
   };
 
   // Selects a clip to display in the Clip component
@@ -69,56 +76,68 @@ class Clips extends React.Component {
     });
   };
 
-  deleteClip = (clip) => {
-    const clipId = clip.clipId
-    console.log(clipId)
-    this.setState({
-      ...this.state,
-      clipsList: this.state.clipsList.filter(_clip => _clip.clipId !== clipId),
-      selectedClip: null
-    }, () => {console.log(this.state.clipsList)})
-  }
+  handleDeleteClip = clip => {
+    const clipId = clip.clipId;
+    console.log(clipId);
+    this.setState(
+      {
+        ...this.state,
+        clipsList: this.state.clipsList.filter(
+          _clip => _clip.clipId !== clipId
+        ),
+        selectedClip: null
+      },
+      () => {
+        console.log(this.state.clipsList);
+      }
+    );
+  };
 
   handleSave = () => {
-    axios.post('http://localhost:3001/saveClip', {
+    axios.post("http://localhost:3001/saveClip", {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
-    })
-  }
+    });
+  };
   render() {
     return (
-      <div>
-        <div className="Player-video-container">
-          <video
-            id="vid1"
-            ref={this.videoRef}
-            className="azuremediaplayer amp-default-skin"
-            controls
-            autoPlay
-            width="640"
-            height="400"
-            poster="poster.jpg"
-          >
-            <source
-              src={this.state.videoUrl}
-              // type="video/mp4"
+      <div className="clip-component-container">
+        <div className="flex-container">
+          <div className="player-video-container">
+            <h1>sdfasdf</h1>
+            <video
+              id="vid1"
+              ref={this.videoRef}
+              className="azuremediaplayer amp-default-skin"
+              controls
+              autoPlay
+              width="640"
+              height="400"
+              poster="poster.jpg"
+            >
+              <source
+                src={this.state.videoUrl}
+                // type="video/mp4"
+              />
+            </video>
+            <br />
+
+            <button onClick={this.handleStart}>Start</button>
+            <button onClick={this.handleEnd}>End</button>
+            <button onClick={this.handleTrim}>Create Clip</button>
+            <button onClick={this.handleSave}>Export Clip</button>
+          </div>
+          <div className="clip-gallery-container">
+            <h1>Your clips</h1>
+
+            <ClipsGallery
+              clipsList={this.state.clipsList}
+              url={this.state.videoUrl}
+              selectClip={this.selectClip}
+              handleDeleteClip={this.handleDeleteClip}
             />
-          </video>
-          <br />
-
-          <button onClick={this.handleStart}>Start</button>
-          <button onClick={this.handleEnd}>End</button>
-          <button onClick={this.handleTrim}>Create Clip</button>
-          <button onClick={this.handleSave}>Export Clip</button>
+          </div>
         </div>
-        <h1>Your clips</h1>
-
-        <ClipsGallery
-          clipsList={this.state.clipsList}
-          url={this.state.videoUrl}
-          selectClip={this.selectClip}
-          deleteClip={this.deleteClip}
-        />
 
         {this.state.selectedClip ? (
           <ClipPreview
