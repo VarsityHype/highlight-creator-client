@@ -17,6 +17,7 @@ import Video from "./components/Video"
 
 // CSS IMPORTS
 import './css/AppBar.css'
+import './css/Video.css'
 
 // A function that routes the user to the right place
 // after login

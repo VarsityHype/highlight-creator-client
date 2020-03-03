@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux'
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 import { convert, toSeconds, format } from "../../utils/helpers";
@@ -11,8 +12,8 @@ class Clips extends React.Component {
 
     //state
     this.state = {
-      videoUrl:
-        "https://astorageserver.blob.core.windows.net/video-storagea/8911870163918805-8861367419101975-Cute%20Cat%20-%203092.mp4",
+      videoUrl: props.videoUrl,
+      videoTitle: props.videoTitle,
       startTime: "",
       endTime: "",
       clipsList: [],
@@ -136,7 +137,7 @@ class Clips extends React.Component {
       <div className="clip-component-container">
         <div className="flex-container">
           <div className="player-video-container">
-            <h1>sdfasdf</h1>
+            <h1>{this.state.videoTitle}</h1>
             <video
               id="vid1"
               ref={this.videoRef}
@@ -182,4 +183,11 @@ class Clips extends React.Component {
   }
 }
 
-export default Clips;
+const mapStateToProps = (state) => {
+  return {
+    videoUrl: state.videoUrl,
+    videoTitle: state.videoTitle
+  }
+}
+
+export default connect(mapStateToProps)(Clips);

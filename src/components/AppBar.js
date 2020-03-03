@@ -140,14 +140,6 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={0} color="secondary">
             <NotificationsIcon />
@@ -209,7 +201,7 @@ export default function PrimarySearchAppBar() {
               <a className="menu-item-a" href="/playlists">Playlists</a>
             </MenuItem>
             <MenuItem>
-              <a className="menu-item-a" href="/videos">Videos</a>
+              <a className="menu-item-a" href="/video">Videos</a>
             </MenuItem>
             <MenuItem>
               <a className="menu-item-a" href="/upload">Upload</a>
