@@ -2,8 +2,9 @@ import React from "react";
 import {connect} from 'react-redux'
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
-import { convert, toSeconds, format } from "../../utils/helpers";
+import ClipSlider from "./Slider/ClipSlider"
 import axios from "axios";
+import {convert, toSeconds, format} from '../../utils/helpers'
 import "../../css/Clip.css";
 
 class Clips extends React.Component {
@@ -18,45 +19,13 @@ class Clips extends React.Component {
       endTime: "",
       clipsList: [],
       selectedClip: null,
-      values: null
+      values: null,
+      duration: null
     };
 
     //refs
     this.videoRef = React.createRef();
   }
-
-  componentDidMount = () => {
-    this.videoRef.current.addEventListener('loadedmetadata', this.onVideoLoad)
-    this.videoRef.current.addEventListener('timeupdate', this.onVideoTimeUpdate)
-  }
-
-  onVideoLoad = event => {
-    const video = this.videoRef.current;
-
-    if (video) {
-      this.setState(() => ({
-        videoLength: [0, convert(video.duration)],
-        values: [convert(video.currentTime)]
-      }))
-    }
-  }
-
-  onVideoTimeUpdate = event => {
-    const video = this.videoRef.current;
-    const time = convert(video.currentTime)
-
-    this.setState({
-      values: [time]
-    })
-  }
-
-  onChange = values => {
-    this.setState(prevState => {
-      this.videoRef.current.currentTime = toSeconds(values)
-      return values
-    })
-  }
-
   // Sets the beginning of the clip with the "Start" button
   handleStart = ref => {
     this.setState({
@@ -132,6 +101,17 @@ class Clips extends React.Component {
       clipsList: this.state.clipsList
     });
   };
+
+  componentDidMount = () =>{
+    const time = convert(this.videoRef.current.duration)
+    console.log(time)
+    this.videoRef.current.addEventListener('loadedmetadata', () => {
+      console.log(this.videoRef.current.duration)
+      this.setState({
+        duration: this.videoRef.current.duration
+      })
+    })
+  }
   render() {
     return (
       <div className="clip-component-container">
@@ -160,6 +140,11 @@ class Clips extends React.Component {
             <button onClick={this.handleTrim}>Create Clip</button>
             <button onClick={this.handleSave}>Export Clip</button>
           </div>
+
+          {this.state.duration ? <ClipSlider 
+            duration={this.state.duration}
+          /> : null}
+
           <div className="clip-gallery-container">
             <h1>Your clips</h1>
 

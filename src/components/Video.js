@@ -5,7 +5,7 @@ function Video(props) {
 
     const getUrlAndSeeVideo = (videoUrl, videoTitle) => {
         props.getUrl(videoUrl, videoTitle)
-        props.history.push("/load")
+        props.history.push("/clips")
     }
 
     const [videoData, setVideoData] = useState([])
