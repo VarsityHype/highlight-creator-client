@@ -78,14 +78,17 @@ class Clips extends React.Component {
         console.log(this.state.clipsList);
       }
     );
-    
-    console.log(this.state.startTime)
+
+    let user = JSON.parse(localStorage.user)
+    let creator_id = user.sub
     const url = "http://localhost:3001/clips/store_clip/"
+    
     axios.post(url, {
       start_timestamp: this.state.startTime,
       end_timestamp: this.state.endTime,
-      title: this.state.clipTitle,
-      azure_url: this.state.videoUrl
+      clip_title: this.state.clipTitle,
+      azure_url: this.state.videoUrl,
+      creator_id: creator_id
     })
   };
 
