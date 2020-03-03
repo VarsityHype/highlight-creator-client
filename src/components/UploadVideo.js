@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
-import axios, {post} from 'axios'
+import axios from 'axios'
 
 class UploadVideo extends Component {
 
