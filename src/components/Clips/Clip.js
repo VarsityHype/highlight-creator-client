@@ -1,6 +1,7 @@
 import React from "react";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
+import { convert, toSeconds, format } from "../../utils/helpers";
 import axios from "axios";
 import "../../css/Clip.css";
 
@@ -15,13 +16,44 @@ class Clips extends React.Component {
       startTime: "",
       endTime: "",
       clipsList: [],
-      selectedClip: null
+      selectedClip: null,
+      values: null
     };
 
     //refs
     this.videoRef = React.createRef();
-    
-    const sourceVideo = this.videoRef.source;
+  }
+
+  componentDidMount = () => {
+    this.videoRef.current.addEventListener('loadedmetadata', this.onVideoLoad)
+    this.videoRef.current.addEventListener('timeupdate', this.onVideoTimeUpdate)
+  }
+
+  onVideoLoad = event => {
+    const video = this.videoRef.current;
+
+    if (video) {
+      this.setState(() => ({
+        videoLength: [0, convert(video.duration)],
+        values: [convert(video.currentTime)]
+      }))
+    }
+  }
+
+  onVideoTimeUpdate = event => {
+    const video = this.videoRef.current;
+    const time = convert(video.currentTime)
+
+    this.setState({
+      values: [time]
+    })
+  }
+
+  onChange = values => {
+    this.setState(prevState => {
+      this.videoRef.current.currentTime = toSeconds(values)
+      return values
+    })
   }
 
   // Sets the beginning of the clip with the "Start" button
