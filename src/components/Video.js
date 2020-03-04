@@ -8,6 +8,7 @@ import axios from 'axios'
 
 function Video(props) {
 
+    
     const [playlistData, setPlaylistData] = useState({})
 
     useEffect(() => {
@@ -44,7 +45,14 @@ function Video(props) {
     
 
     useEffect((props) => {
-        fetch('http://localhost:3001/video/')
+        let token = localStorage.jwt
+        fetch('http://localhost:3001/video/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "Authorization": `Bearer ${token}`
+            },
+        })
         .then(response => response.json())
         .then(json => {
             const videos = json.map((video) => {
