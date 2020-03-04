@@ -24,7 +24,7 @@ class Clips extends React.Component {
       clipsList: [],
       selectedClip: null,
       values: null,
-      duration: null
+      duration: null,
       clipTitle: []
     };
 
@@ -84,8 +84,6 @@ class Clips extends React.Component {
       }
     );
 
-    let user = JSON.parse(localStorage.user)
-    let creator_id = user.sub
     const url = "http://localhost:3001/clips/store_clip/"
     
     axios.post(url, {
@@ -93,7 +91,6 @@ class Clips extends React.Component {
       end_timestamp: this.state.endTime,
       clip_title: this.state.clipTitle,
       azure_url: this.state.videoUrl,
-      creator_id: creator_id
     })
   };
 

@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 function Video(props) {
 
     const getUrlAndSeeVideo = (videoUrl, videoTitle) => {
         props.getUrl(videoUrl, videoTitle)
         props.history.push("/clips")
+    }
+
+    const addToPlaylist = () => {
+        const url = ''    
+        axios.post(url, {
+            
+        })
     }
 
     const [videoData, setVideoData] = useState([])
@@ -41,6 +49,7 @@ function Video(props) {
                                 <div className="h1-title-div">
                                     <h1 onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>{videoTitle}</h1>
                                 </div>
+                                <button onClick={() => addToPlaylist()}>Add to playlist</button>
                                 <p>{video.description}</p>
                             </div>
                         </div>
