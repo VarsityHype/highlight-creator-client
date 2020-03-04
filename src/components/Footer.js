@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/footer.css";
+import "../css/Footer.css";
 
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
