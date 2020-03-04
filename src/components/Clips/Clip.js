@@ -2,11 +2,9 @@ import React from "react";
 import {connect} from 'react-redux'
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
-
 import ClipSlider from "./Slider/ClipSlider"
 import PlayArrow from "@material-ui/icons/PlayArrow"
 import Pause from "@material-ui/icons/Pause"
-
 import axios from "axios";
 import {convert, toSeconds, format} from '../../utils/helpers'
 import "../../css/Clip.css";
@@ -24,8 +22,8 @@ class Clips extends React.Component {
       clipsList: [],
       selectedClip: null,
       values: null,
-      duration: null
-      clipTitle: []
+      duration: null,
+      clipTitle: "",
     };
 
     //refs
@@ -33,11 +31,11 @@ class Clips extends React.Component {
   }
 
   // Send clip's title to DB
-  handleClipTitle = (e) => {
+  handleClipTitle = (title) => {
     this.setState({
       ...this.state,
-      clipTitle: e.target.value
-    })
+      clipTitle: title
+    });
   }
   // Sets the beginning of the clip with the "Start" button
   handleStart = ref => {
@@ -65,11 +63,11 @@ class Clips extends React.Component {
   };
 
   // Creates the clip and sets it in state
-  handleTrim = () => {
+  handleTrim = (startTime, endTime) => {
     let newClip = {
       clipId: this.uuidv4(),
-      start: this.state.startTime,
-      end: this.state.endTime,
+      start: startTime,
+      end: endTime,
       title: this.state.clipTitle,
       video_url: this.state.videoUrl
     };
@@ -105,6 +103,7 @@ class Clips extends React.Component {
     });
   };
 
+  // Finds a clip by its ID and removes it from clips gallery
   handleDeleteClip = clip => {
     const clipId = clip.clipId;
     console.log(clipId);
@@ -122,6 +121,7 @@ class Clips extends React.Component {
     );
   };
 
+  // Sends the list of clips to database
   handleSave = () => {
     axios.post("http://localhost:3001/saveClip", {
       sourceVideo: this.state.videoUrl,
@@ -129,6 +129,7 @@ class Clips extends React.Component {
     });
   };
 
+  // Adds a clip from the slider
   handleSliderClip = (start, end) => {
     let newClip = {
       clipId: this.uuidv4(),
@@ -147,11 +148,9 @@ class Clips extends React.Component {
     );
   }
 
+  // Loads the video's entire duration for clipping
   componentDidMount = () =>{
-    const time = convert(this.videoRef.current.duration)
-    console.log(time)
     this.videoRef.current.addEventListener('loadedmetadata', () => {
-      console.log(this.videoRef.current.duration)
       this.setState({
         duration: this.videoRef.current.duration
       })
@@ -173,25 +172,39 @@ class Clips extends React.Component {
               height="400"
               poster="poster.jpg"
             >
-              <source
-                src={this.state.videoUrl}
-                // type="video/mp4"
-              />
+              <source src={this.state.videoUrl} />
             </video>
             <br />
-            <div className="clip-controls-div">
-              <PlayArrow className="play-arrow-icon" onClick={this.handleStart}></PlayArrow>
-              <Pause className="play-arrow-icon" onClick={this.handleEnd}></Pause>
-              <input name="title" placeholder="clip title" type="text" onChange={this.handleClipTitle} />
-              <button onClick={this.handleTrim}>Create Clip</button>
-              <button onClick={this.handleSave}>Export Clip</button>
+            <div>
+              {this.state.duration ? (
+                <ClipSlider
+                  duration={this.state.duration}
+                  handleSliderClip={this.handleSliderClip}
+                  handleClipTitle={this.handleClipTitle}
+                  handleTrim={this.handleTrim}
+                  handleSave={this.handleSave}
+                />
+              ) : null}
+              {/* <div className="clip-controls-div">
+                <PlayArrow
+                  className="play-arrow-icon"
+                  onClick={this.handleStart}
+                ></PlayArrow>
+                <Pause
+                  className="play-arrow-icon"
+                  onClick={this.handleEnd}
+                ></Pause>
+                <input
+                  name="title"
+                  placeholder="clip title"
+                  type="text"
+                  onChange={this.handleClipTitle}
+                />
+                <button onClick={this.handleTrim}>Create Clip</button>
+                <button onClick={this.handleSave}>Export Clip</button>
+              </div> */}
             </div>
           </div>
-
-          {this.state.duration ? <ClipSlider 
-            duration={this.state.duration}
-            handleSliderClip={this.handleSliderClip}
-          /> : null}
 
           <div className="clip-gallery-container">
             <h1>Your clips</h1>

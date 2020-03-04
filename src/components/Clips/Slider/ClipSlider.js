@@ -2,33 +2,46 @@ import React, {useState, useEffect} from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
-import { convert, toSeconds, format, msToTime } from "../../../utils/helpers";
-
+import { msToTime } from "../../../utils/helpers";
+import PlayArrow from "@material-ui/icons/PlayArrow";
+import Pause from "@material-ui/icons/Pause";
+import "../../../css/Clip.css";
 const useStyles = makeStyles({
-  root: {
-    width: 300
-  }
+  // root: {
+  //   width: 300
+  // }
 });
-
-function valuetext(value) {
-  return `${value}°C`;
-}
 
 const ClipSlider = (props) => {
     const classes = useStyles();
     const duration = props.duration
-    const displayedDuration = duration.toFixed(1)
+    const displayedDuration = duration.toFixed(0)
     const [value, setValue] = useState([0, 0]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
 
+    const handleTrim = () => {
+      let start = value[0]
+      let end = value[1]
+      props.handleTrim(start, end)
+    }
+
+    const handleClipTitle = (e) => {
+      let clipTitle = e.target.value
+      props.handleClipTitle(clipTitle)
+    }
+    
     const handleSliderClipSubmit = () => {
       let start = value[0]
       let end = value[1]
       props.handleSliderClip(start, end);
     };
+
+    const handleSave = () => {
+      props.handleSave()
+    }
 
     useEffect(() => {
         
@@ -38,19 +51,42 @@ const ClipSlider = (props) => {
 
     return (
       <div className={classes.root}>
-        <Typography id="range-slider" gutterBottom>
-        </Typography>
+        <div className="clip-controls-div">
+        <Typography id="range-slider" gutterBottom></Typography>
         <Slider
           value={value}
           onChange={handleChange}
-          // valueLabelDisplay="auto"
-          // aria-labelledby="range-slider"
-          // getAriaValueText={valuetext}
           min={0}
           max={displayedDuration}
         />
-        <h5>Time: {msToTime(value[0])} / {msToTime(value[1])}</h5>
-        <button onClick={handleSliderClipSubmit}>Create Clip</button>
+        <h5 className="video-time-header">
+          Time: {msToTime(value[0])} / {msToTime(value[1])}
+        </h5>
+        {/* <div className="clip-controls-div"> */}
+          {/* <PlayArrow
+            className="play-arrow-icon"
+            // onClick={this.handleStart}
+          ></PlayArrow>
+          <Pause className="play-arrow-icon" 
+          // onClick={this.handleEnd} */}
+          {/* ></Pause> */}
+          <input
+            name="title"
+            placeholder="clip title"
+            type="text"
+            onChange={handleClipTitle}
+          />
+          <button 
+          onClick={handleTrim}
+          >
+            Create Clip
+            </button>
+          
+          <button onClick={handleSave}>
+            Export Clip
+            </button>
+        </div>
+         {/* <button onClick={handleSliderClipSubmit}>Create Clip</button> */}
       </div>
     );
 
