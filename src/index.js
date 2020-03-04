@@ -14,11 +14,20 @@ import Clip from "./components/Clips/Clip";
 import NavBar from "./components/NavBar"
 import UploadVideo from "./components/UploadVideo";
 import Video from "./components/Video"
+import PlaylistsMenu from "./components/PlaylistsMenu"
+import axios from 'axios'
 
 // CSS IMPORTS
 import './css/AppBar.css'
 import './css/Video.css'
 import './css/App.css'
+
+// axios authorization headers
+
+let user = JSON.parse(localStorage.user)
+let creator_id = user.sub
+axios.defaults.headers.common['Authorization'] = localStorage.jwt;
+axios.defaults.headers.common['request_user_id'] = creator_id;
 
 // A function that routes the user to the right place
 // after login
@@ -48,9 +57,10 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
-          <Route path="/load" component={Clip} />
+          <Route path="/clips" component={Clip} />
           <Route path="/upload" component={UploadVideo} />
           <Route path="/video" component={Video} />
+          <Route path="/playlists" component={PlaylistsMenu} />
         </Switch>
       </BrowserRouter>
   </Auth0Provider>

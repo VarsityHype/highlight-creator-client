@@ -5,3 +5,14 @@
 .player-video-container {
   margin-right: 1rem;
 }
+
+.play-arrow-icon {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.clip-controls-div {
+  background-color: whitesmoke;
+  margin: 1rem;
+  padding: 1rem;
+}
