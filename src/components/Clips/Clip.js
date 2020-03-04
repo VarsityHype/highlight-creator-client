@@ -102,6 +102,24 @@ class Clips extends React.Component {
     });
   };
 
+  handleSliderClip = (start, end) => {
+    let newClip = {
+      clipId: this.uuidv4(),
+      start: start,
+      end: end
+    }
+
+    this.setState(
+      {
+        ...this.state,
+        clipsList: this.state.clipsList.concat(newClip)
+      },
+      () => {
+        console.log(this.state.clipsList);
+      }
+    );
+  }
+
   componentDidMount = () =>{
     const time = convert(this.videoRef.current.duration)
     console.log(time)
@@ -143,6 +161,7 @@ class Clips extends React.Component {
 
           {this.state.duration ? <ClipSlider 
             duration={this.state.duration}
+            handleSliderClip={this.handleSliderClip}
           /> : null}
 
           <div className="clip-gallery-container">

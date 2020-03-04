@@ -19,7 +19,7 @@ export function format(val) {
 
 export function msToTime(duration) {
   var actualmilliseconds = parseInt(duration * 1000)
-  var milliseconds = parseInt((actualmilliseconds % 1000) / 100),
+  var milliseconds = parseInt((actualmilliseconds % 1000) / 10),
     seconds = parseInt((actualmilliseconds / 1000) % 60),
     minutes = parseInt((actualmilliseconds / (1000 * 60)) % 60),
     hours = parseInt((actualmilliseconds / (1000 * 60 * 60)) % 24);
@@ -28,7 +28,11 @@ export function msToTime(duration) {
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
 
-  return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+  if (hours == 0) {
+    return minutes + ":" + seconds;
+  } else {
+    return hours + ":" + minutes + ":" + seconds;
+  }
 }
 // export function msToTime(millisec) {
 //   // var milliseconds = parseInt((duration % 1000) / 100),

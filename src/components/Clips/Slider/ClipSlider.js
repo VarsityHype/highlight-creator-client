@@ -16,38 +16,41 @@ function valuetext(value) {
 
 const ClipSlider = (props) => {
     const classes = useStyles();
-    const [value, setValue] = useState([0, 0]);
     const duration = props.duration
-    const displayedDuration = duration.toFixed(2)
+    const displayedDuration = duration.toFixed(1)
+    const [value, setValue] = useState([0, 0]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
 
+    const handleSliderClipSubmit = () => {
+      let start = value[0]
+      let end = value[1]
+      props.handleSliderClip(start, end);
+    };
+
     useEffect(() => {
-        const number = 300000000
-        // const ok = convert(number)
-        const ok2 = msToTime(number)
-        console.log(ok2)
-        setValue([0, duration])
+        
+        setValue([0, displayedDuration])
         console.log(displayedDuration)
     }, [])
 
     return (
       <div className={classes.root}>
         <Typography id="range-slider" gutterBottom>
-          Temperature range
         </Typography>
         <Slider
           value={value}
           onChange={handleChange}
-          valueLabelDisplay="auto"
-          aria-labelledby="range-slider"
-          getAriaValueText={valuetext}
+          // valueLabelDisplay="auto"
+          // aria-labelledby="range-slider"
+          // getAriaValueText={valuetext}
           min={0}
           max={displayedDuration}
         />
-        <h5>Time: {msToTime(value[1])} / {msToTime(displayedDuration)}</h5>
+        <h5>Time: {msToTime(value[0])} / {msToTime(value[1])}</h5>
+        <button onClick={handleSliderClipSubmit}>Create Clip</button>
       </div>
     );
 
