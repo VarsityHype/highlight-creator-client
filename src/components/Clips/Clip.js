@@ -24,34 +24,20 @@ class Clips extends React.Component {
       values: null,
       duration: null,
       clipTitle: "",
+      clipPlaying: false
     };
 
     //refs
     this.videoRef = React.createRef();
   }
 
-  // Send clip's title to DB
+
   handleClipTitle = (title) => {
     this.setState({
       ...this.state,
       clipTitle: title
     });
   }
-  // Sets the beginning of the clip with the "Start" button
-  handleStart = ref => {
-    this.setState({
-      ...this.state,
-      startTime: this.videoRef.current.currentTime
-    });
-  };
-
-  // Sets the end of the clip with the "End" button
-  handleEnd = () => {
-    this.setState({
-      ...this.state,
-      endTime: this.videoRef.current.currentTime
-    });
-  };
 
   // Randomly generates an id
   uuidv4 = () => {
@@ -75,7 +61,7 @@ class Clips extends React.Component {
     this.setState(
       {
         ...this.state,
-        clipsList: this.state.clipsList.concat(newClip)
+        clipsList: this.state.clipsList.concat(newClip),
       },
       () => {
         console.log(this.state.clipsList);
@@ -96,9 +82,16 @@ class Clips extends React.Component {
   selectClip = clip => {
     this.setState({
       ...this.state,
-      selectedClip: { clip }
+      selectedClip: { clip },
+      clipPlaying: true
     });
   };
+
+  handleReturnToVideo = () => {
+    this.setState({
+      clipPlaying: false
+    })
+  }
 
   // Finds a clip by its ID and removes it from clips gallery
   handleDeleteClip = clip => {
@@ -126,25 +119,6 @@ class Clips extends React.Component {
     });
   };
 
-  // Adds a clip from the slider
-  handleSliderClip = (start, end) => {
-    let newClip = {
-      clipId: this.uuidv4(),
-      start: start,
-      end: end
-    }
-
-    this.setState(
-      {
-        ...this.state,
-        clipsList: this.state.clipsList.concat(newClip)
-      },
-      () => {
-        console.log(this.state.clipsList);
-      }
-    );
-  }
-
   // Loads the video's entire duration for clipping
   componentDidMount = () =>{
     this.videoRef.current.addEventListener('loadedmetadata', () => {
@@ -159,21 +133,30 @@ class Clips extends React.Component {
         <div className="flex-container">
           <div className="player-video-container">
             <h1>{this.state.videoTitle}</h1>
-            <video
-              id="vid1"
-              ref={this.videoRef}
-              className="azuremediaplayer amp-default-skin"
-              controls
-              autoPlay
-              width="640"
-              height="400"
-              poster="poster.jpg"
-            >
-              <source src={this.state.videoUrl} />
-            </video>
+            {this.state.clipPlaying ? (
+              <ClipPreview
+                selectedClip={this.state.selectedClip}
+                sourceUrl={this.state.videoUrl}
+              />
+            ) : (
+              <video
+                id="vid1"
+                ref={this.videoRef}
+                className="azuremediaplayer amp-default-skin"
+                controls
+                autoPlay
+                width="640"
+                height="400"
+                poster="poster.jpg"
+              >
+                <source src={this.state.videoUrl} />
+              </video>
+            )}
             <br />
             <div>
-              {this.state.duration ? (
+              {this.state.duration ? 
+              this.state.clipPlaying ? null :
+              (
                 <ClipSlider
                   duration={this.state.duration}
                   handleSliderClip={this.handleSliderClip}
@@ -182,46 +165,22 @@ class Clips extends React.Component {
                   handleSave={this.handleSave}
                 />
               ) : null}
-              {/* <div className="clip-controls-div">
-                <PlayArrow
-                  className="play-arrow-icon"
-                  onClick={this.handleStart}
-                ></PlayArrow>
-                <Pause
-                  className="play-arrow-icon"
-                  onClick={this.handleEnd}
-                ></Pause>
-                <input
-                  name="title"
-                  placeholder="clip title"
-                  type="text"
-                  onChange={this.handleClipTitle}
-                />
-                <button onClick={this.handleTrim}>Create Clip</button>
-                <button onClick={this.handleSave}>Export Clip</button>
-              </div> */}
             </div>
           </div>
 
           <div className="clip-gallery-container">
             <h1>Your clips</h1>
-
+            <button onClick={this.handleReturnToVideo}>Return to Main Video</button>
             <ClipsGallery
               clipsList={this.state.clipsList}
               url={this.state.videoUrl}
               selectClip={this.selectClip}
               handleDeleteClip={this.handleDeleteClip}
               title={this.state.clipTitle}
+              clipPlaying={this.handleReturnToVideo}
             />
           </div>
         </div>
-
-        {this.state.selectedClip ? (
-          <ClipPreview
-            selectedClip={this.state.selectedClip}
-            sourceUrl={this.state.videoUrl}
-          />
-        ) : null}
       </div>
     );
   }

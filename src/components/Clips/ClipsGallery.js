@@ -41,9 +41,6 @@ const ClipsGallery = props => {
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
-        {/* <GridListTile key="Subheader" cols={2} style={{ display: "none" }}>
-          <ListSubheader component="div">Your Clips</ListSubheader>
-        </GridListTile> */}
         {props.clipsList.map((clip, index) => (
           <GridListTile key={index} style={{ width: "100%" }}>
             <video
@@ -76,31 +73,6 @@ const ClipsGallery = props => {
         ))}
       </GridList>
     </div>
-
-    // <div>
-    //   {props.clipsList.map((clip, index) => {
-    //     return (
-    //       <div key={index}>
-    //         <video
-    //           key={index}
-    //           id="vid1"
-    //           className="azuremediaplayer amp-default-skin"
-    //           autoPlay={false}
-    //           controls={false}
-    //           width="320"
-    //           height="200"
-    //           poster="poster.jpg"
-    //           preload="metadata"
-    //           onClick={() => selectClip(clip)}
-    //           src={`${props.url}#t=${clip.start},${clip.end}`}
-    //         >
-    //           <source type="video/mp4" />
-    //         </video>
-    //         <ClearIcon onClick={() => deleteClip(clip)} />
-    //       </div>
-    //     );
-    //   })}
-    // </div>
   );
 };
 export default ClipsGallery;

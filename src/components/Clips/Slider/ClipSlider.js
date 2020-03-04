@@ -62,14 +62,6 @@ const ClipSlider = (props) => {
         <h5 className="video-time-header">
           Time: {msToTime(value[0])} / {msToTime(value[1])}
         </h5>
-        {/* <div className="clip-controls-div"> */}
-          {/* <PlayArrow
-            className="play-arrow-icon"
-            // onClick={this.handleStart}
-          ></PlayArrow>
-          <Pause className="play-arrow-icon" 
-          // onClick={this.handleEnd} */}
-          {/* ></Pause> */}
           <input
             name="title"
             placeholder="clip title"
@@ -86,7 +78,6 @@ const ClipSlider = (props) => {
             Export Clip
             </button>
         </div>
-         {/* <button onClick={handleSliderClipSubmit}>Create Clip</button> */}
       </div>
     );
 
