@@ -20,11 +20,6 @@ class UploadVideo extends Component {
         })
     }
 
-    onHandleThumbnail = (e) => {
-        this.setState({
-            thumbnail: e.target.files[0]
-        })
-    }
 
     onHandleTitleDescriptionChange = (e) => {
         this.setState({
@@ -51,7 +46,8 @@ class UploadVideo extends Component {
                 uploader_id: `${uploader_id}`,
                 azure_url: `${res.data.uploaded_url}`,
                 title: title,
-                description: description
+                description: description,
+                thumbnail: `${this.state.thumbnail}`
                 };
                 fetch('http://localhost:3001/upload/uploaded', {
                   method: 'POST',
@@ -75,7 +71,7 @@ class UploadVideo extends Component {
             <form autoComplete="on">
                 <div>
                     <div className="textField">
-                        <TextField id="outlined-basic" label="Title" variant="outlined" type="text" name="title"  onChange={this.onHandleTitleDescriptionChange} />
+                        <TextField id="outlined-basic"  label="Title" variant="outlined" type="text" name="title"  onChange={this.onHandleTitleDescriptionChange} />
                     </div>
                     <div className="textField">
                         <TextField id="outlined-basic" label="Description" variant="outlined" type="text" name="description" onChange={this.onHandleTitleDescriptionChange} />
@@ -84,7 +80,6 @@ class UploadVideo extends Component {
                     <div>
                         <input type="file" onChange={this.onHandleChange} />
                     </div>
-                    <input type="file" onChange={this.onHandleThumbnail} className="custom-file-upload"></input>
                     <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
                 </div>
             </form>
