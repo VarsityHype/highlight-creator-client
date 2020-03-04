@@ -1,26 +1,37 @@
-.video-div {
-    background-color: rgba(0, 0, 0, 0.2);
+.container {
+    background-color: rgba(5, 5, 5, 0.2);
     margin: 2rem;
 }
 
 .video-div-inner {
     margin: 1rem;
+    
 }
 
 .video-page-video {
-    margin: 1rem;
+    margin: 10rem;
+
 }
 
 .title-description-div {
-    color: #FFF;
-	font: 14px/19px  "Helvetica", "Arial", sans-serif;
+    color: rgb(255, 255, 255);
+    font: 14px/19px  "Helvetica", "Arial", sans-serif;
+
 }
+.test{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.test>div {
+    box-sizing:border-box
+  }
 
 /* .h1-title-div {
     background-color: turquoise;
 } */
 
-.h1-title-div:hover {
+.video-container:hover {
     cursor: pointer;
 }
 
