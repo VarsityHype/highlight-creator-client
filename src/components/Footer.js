@@ -1,20 +1,23 @@
 import React from "react";
+import "../../css/footer.css";
 
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+// import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
+// import Badge from "@material-ui/core/Badge";
 import Menu from "@material-ui/core/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import MenuItem from "@material-ui/core/MenuItem";
+// import AccountCircle from "@material-ui/icons/AccountCircle";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
+// import MoreIcon from "@material-ui/icons/MoreVert";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
+
+const logo = require("../assets/vype-logo.png");
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -46,39 +49,39 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       display: "flex"
     }
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none"
-    }
   }
+  //   sectionMobile: {
+  //     display: "flex",
+  //     [theme.breakpoints.up("md")]: {
+  //       display: "none"
+  //     }
+  //   }
 }));
 
 export default function Footer() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  //   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  //   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = event => {
-    setAnchorEl(event.currentTarget);
-  };
+  //   const handleProfileMenuOpen = event => {
+  //     setAnchorEl(event.currentTarget);
+  //   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+  //   const handleMobileMenuClose = () => {
+  //     setMobileMoreAnchorEl(null);
+  //   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
+    // handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = event => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  //   const handleMobileMenuOpen = event => {
+  //     setMobileMoreAnchorEl(event.currentTarget);
+  //   };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -93,61 +96,69 @@ export default function Footer() {
     ></Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+  //   const mobileMenuId = "primary-search-account-menu-mobile";
+  //   const renderMobileMenu = (
+  //     <Menu
+  //       anchorEl={mobileMoreAnchorEl}
+  //       anchorOrigin={{ vertical: "top", horizontal: "right" }}
+  //       id={mobileMenuId}
+  //       keepMounted
+  //       transformOrigin={{ vertical: "top", horizontal: "right" }}
+  //       open={isMobileMenuOpen}
+  //       onClose={handleMobileMenuClose}
+  //     >
+  //       <MenuItem>
+  //         <IconButton aria-label="show 11 new notifications" color="inherit">
+  //           <Badge badgeContent={0} color="secondary">
+  //             <NotificationsIcon />
+  //           </Badge>
+  //         </IconButton>
+  //         <p>Notifications</p>
+  //       </MenuItem>
 
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      <MenuItem>
-        <a className="menu-item-a-mobile" href="/playlists">
-          Playlists
-        </a>
-      </MenuItem>
-      <MenuItem>
-        <a className="menu-item-a-mobile" href="/upload">
-          Upload
-        </a>
-      </MenuItem>
-    </Menu>
-  );
+  //       <MenuItem onClick={handleProfileMenuOpen}>
+  //         <IconButton
+  //           aria-label="account of current user"
+  //           aria-controls="primary-search-account-menu"
+  //           aria-haspopup="true"
+  //           color="inherit"
+  //         >
+  //           <AccountCircle />
+  //         </IconButton>
+  //         <p>Profile</p>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <a className="menu-item-a-mobile" href="/playlists">
+  //           Playlists
+  //         </a>
+  //       </MenuItem>
+  //       <MenuItem>
+  //         <a className="menu-item-a-mobile" href="/upload">
+  //           Upload
+  //         </a>
+  //       </MenuItem>
+  //     </Menu>
+  //   );
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.grow} id="footer">
       <AppBar
         position="static"
         style={{ background: "transparent", boxShadow: "none" }}
       >
-        <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            VarsityHype
+        <Toolbar style={{ justifyContent: "space-between" }}>
+          <Typography className={classes.title} variant="caption">
+            ©2020 VYPE Media
+            <br /> 1314 Brittmoore Rd
+            <br /> Houston, TX 77043
           </Typography>
-          <div className={classes.grow} />
+          {/* <div className={classes.grow} /> */}
+
+          <div>
+            <a href="https://www.vype.com/">
+              <img style={{ maxHeight: "85px" }} src={logo} alt="vype logo" />
+            </a>
+          </div>
           <div className={classes.sectionDesktop}>
             <MenuItem>
               <a
@@ -179,20 +190,9 @@ export default function Footer() {
               </a>
             </MenuItem>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
     </div>
   );

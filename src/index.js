@@ -11,14 +11,14 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Test from "./components/Test";
 import Clip from "./components/Clips/Clip";
-import NavBar from "./components/NavBar"
+import BaseLayout from "./components/BaseLayout";
 import UploadVideo from "./components/UploadVideo";
-import Video from "./components/Video"
+import Video from "./components/Video";
 
 // CSS IMPORTS
-import './css/AppBar.css'
-import './css/Video.css'
-import './css/App.css'
+import "./css/AppBar.css";
+import "./css/Video.css";
+import "./css/App.css";
 
 // A function that routes the user to the right place
 // after login
@@ -37,23 +37,24 @@ const store = createStore(
 );
 ReactDOM.render(
   <Provider store={store}>
-  <Auth0Provider
-    domain={config.domain}
-    client_id={config.clientId}
-    redirect_uri={window.location.origin}
-    onRedirectCallback={onRedirectCallback}
-  >
+    <Auth0Provider
+      domain={config.domain}
+      client_id={config.clientId}
+      redirect_uri={window.location.origin}
+      onRedirectCallback={onRedirectCallback}
+    >
       <BrowserRouter>
-      <NavBar />
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route path="/test" component={Test} />
-          <Route path="/clips" component={Clip} />
-          <Route path="/upload" component={UploadVideo} />
-          <Route path="/video" component={Video} />
-        </Switch>
+        <BaseLayout>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/test" component={Test} />
+            <Route path="/clips" component={Clip} />
+            <Route path="/upload" component={UploadVideo} />
+            <Route path="/video" component={Video} />
+          </Switch>
+        </BaseLayout>
       </BrowserRouter>
-  </Auth0Provider>
+    </Auth0Provider>
   </Provider>,
   document.getElementById("root")
 );
