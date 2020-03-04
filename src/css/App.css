@@ -1,0 +1,29 @@
+body{
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/991fa731493053.565348a4a5746.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color: #FFF;
+	font: 14px/19px  "Helvetica", "Arial", sans-serif;
+    
+}
+
+.textField{
+    background-color: tomato;
+    margin-left: 10px;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    border-radius: 2em;
+    border: 0.2em solid #e7e7e7;
+    color: #d6d6d6;
+    cursor: pointer;
+    font-size: 2vmin;
+    padding: 0.7em 1.5em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+}
+
+
+
+

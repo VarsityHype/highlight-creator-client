@@ -1,6 +1,8 @@
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa";
 import  ExternalApi from "./views/ExternalApi"
+import Profile from "./components/Profile"
+
 
 function App() {
   const { loading } = useAuth0();
@@ -10,7 +12,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="body">
       <ExternalApi/>
     </div>
   );

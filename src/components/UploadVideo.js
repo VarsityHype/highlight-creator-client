@@ -8,6 +8,7 @@ class UploadVideo extends Component {
         super(props)
         this.state = {
             selectedFile: null,
+            thumbnail: null,
             title: '',
             description: ''
         } 
@@ -16,6 +17,12 @@ class UploadVideo extends Component {
     onHandleChange = (e) => {
         this.setState({
             selectedFile: e.target.files[0],
+        })
+    }
+
+    onHandleThumbnail = (e) => {
+        this.setState({
+            thumbnail: e.target.files[0]
         })
     }
 
@@ -67,9 +74,17 @@ class UploadVideo extends Component {
             </div>
             <form autoComplete="on">
                 <div>
-                    <TextField type="text" name="title" placeholder="title" onChange={this.onHandleTitleDescriptionChange} />
-                    <TextField type="text" name="description" placeholder="description" onChange={this.onHandleTitleDescriptionChange} />
-                    <input type="file" onChange={this.onHandleChange} />
+                    <div className="textField">
+                        <TextField id="outlined-basic" label="Title" variant="outlined" type="text" name="title"  onChange={this.onHandleTitleDescriptionChange} />
+                    </div>
+                    <div className="textField">
+                        <TextField id="outlined-basic" label="Description" variant="outlined" type="text" name="description" onChange={this.onHandleTitleDescriptionChange} />
+                    </div>
+
+                    <div>
+                        <input type="file" onChange={this.onHandleChange} />
+                    </div>
+                    <input type="file" onChange={this.onHandleThumbnail} className="custom-file-upload"></input>
                     <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
                 </div>
             </form>
