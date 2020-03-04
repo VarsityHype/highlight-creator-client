@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
-import axios, {post} from 'axios'
+import axios from 'axios'
 
 class UploadVideo extends Component {
 
@@ -28,13 +28,17 @@ class UploadVideo extends Component {
     onHandleFileUpload = () => {
 
         const title = this.state.title
+        const token = localStorage.jwt
         const description = this.state.description
         const url = 'http://localhost:3001/upload/'
         const data = new FormData()
         data.append('image', this.state.selectedFile)
-        axios.post(url, data, {})
+        axios.post(url, data, {
+            headers:{"Authorization": `Bearer ${token}`}
+        })
         .then(res => {
             let info = JSON.parse(localStorage.user)
+            let token = localStorage.jwt
             let uploader_id = info.sub
             let video = {
                 uploader_id: `${uploader_id}`,
@@ -45,7 +49,8 @@ class UploadVideo extends Component {
                 fetch('http://localhost:3001/upload/uploaded', {
                   method: 'POST',
                   headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                   },
                   body: JSON.stringify(video)
                 }).then(response => response.json())

@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa";
+import  ExternalApi from "./views/ExternalApi"
 
 function App() {
   const { loading } = useAuth0();
@@ -10,6 +11,7 @@ function App() {
 
   return (
     <div>
+      <ExternalApi/>
     </div>
   );
 }
