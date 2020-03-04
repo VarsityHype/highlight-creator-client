@@ -4,11 +4,11 @@ import Footer from "./Footer";
 
 const BaseLayout = props => {
   return (
-    <>
+    <div>
       <AppBar />
       {props.children}
       <Footer />
-    </>
+    </div>
   );
 };
 
