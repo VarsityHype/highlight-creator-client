@@ -165,7 +165,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <a className="menu-item-a" href="/">VarsityHype</a>

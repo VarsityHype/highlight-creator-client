@@ -1,5 +1,5 @@
 .video-div {
-    background-color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.2);
     margin: 2rem;
 }
 
@@ -12,12 +12,13 @@
 }
 
 .title-description-div {
-    margin: 1rem;
+    color: #FFF;
+	font: 14px/19px  "Helvetica", "Arial", sans-serif;
 }
 
-.h1-title-div {
+/* .h1-title-div {
     background-color: turquoise;
-}
+} */
 
 .h1-title-div:hover {
     cursor: pointer;
