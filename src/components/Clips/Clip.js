@@ -2,9 +2,13 @@ import React from "react";
 import {connect} from 'react-redux'
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
+
+import ClipSlider from "./Slider/ClipSlider"
 import PlayArrow from "@material-ui/icons/PlayArrow"
 import Pause from "@material-ui/icons/Pause"
+
 import axios from "axios";
+import {convert, toSeconds, format} from '../../utils/helpers'
 import "../../css/Clip.css";
 
 class Clips extends React.Component {
@@ -19,6 +23,8 @@ class Clips extends React.Component {
       endTime: "",
       clipsList: [],
       selectedClip: null,
+      values: null,
+      duration: null
       clipTitle: []
     };
 
@@ -33,7 +39,6 @@ class Clips extends React.Component {
       clipTitle: e.target.value
     })
   }
-
   // Sets the beginning of the clip with the "Start" button
   handleStart = ref => {
     this.setState({
@@ -123,6 +128,35 @@ class Clips extends React.Component {
       clipsList: this.state.clipsList
     });
   };
+
+  handleSliderClip = (start, end) => {
+    let newClip = {
+      clipId: this.uuidv4(),
+      start: start,
+      end: end
+    }
+
+    this.setState(
+      {
+        ...this.state,
+        clipsList: this.state.clipsList.concat(newClip)
+      },
+      () => {
+        console.log(this.state.clipsList);
+      }
+    );
+  }
+
+  componentDidMount = () =>{
+    const time = convert(this.videoRef.current.duration)
+    console.log(time)
+    this.videoRef.current.addEventListener('loadedmetadata', () => {
+      console.log(this.videoRef.current.duration)
+      this.setState({
+        duration: this.videoRef.current.duration
+      })
+    })
+  }
   render() {
     return (
       <div className="clip-component-container">
@@ -153,6 +187,12 @@ class Clips extends React.Component {
               <button onClick={this.handleSave}>Export Clip</button>
             </div>
           </div>
+
+          {this.state.duration ? <ClipSlider 
+            duration={this.state.duration}
+            handleSliderClip={this.handleSliderClip}
+          /> : null}
+
           <div className="clip-gallery-container">
             <h1>Your clips</h1>
 

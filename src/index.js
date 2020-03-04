@@ -47,7 +47,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/test" component={Test} />
-          <Route path="/load" component={Clip} />
+          <Route path="/clips" component={Clip} />
           <Route path="/upload" component={UploadVideo} />
           <Route path="/video" component={Video} />
         </Switch>
