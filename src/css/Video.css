@@ -23,3 +23,7 @@
 .h1-title-div:hover {
     cursor: pointer;
 }
+
+#add-to-playlist {
+    color: white;
+}
