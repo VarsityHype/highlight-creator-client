@@ -1,14 +1,14 @@
 import React from "react";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 
-import ClipSlider from "./Slider/ClipSlider"
-import PlayArrow from "@material-ui/icons/PlayArrow"
-import Pause from "@material-ui/icons/Pause"
+import ClipSlider from "./Slider/ClipSlider";
+import PlayArrow from "@material-ui/icons/PlayArrow";
+import Pause from "@material-ui/icons/Pause";
 
 import axios from "axios";
-import {convert, toSeconds, format} from '../../utils/helpers'
+import { convert, toSeconds, format } from "../../utils/helpers";
 import "../../css/Clip.css";
 
 class Clips extends React.Component {
@@ -24,7 +24,7 @@ class Clips extends React.Component {
       clipsList: [],
       selectedClip: null,
       values: null,
-      duration: null
+      duration: null,
       clipTitle: []
     };
 
@@ -33,12 +33,12 @@ class Clips extends React.Component {
   }
 
   // Send clip's title to DB
-  handleClipTitle = (e) => {
+  handleClipTitle = e => {
     this.setState({
       ...this.state,
       clipTitle: e.target.value
-    })
-  }
+    });
+  };
   // Sets the beginning of the clip with the "Start" button
   handleStart = ref => {
     this.setState({
@@ -84,17 +84,17 @@ class Clips extends React.Component {
       }
     );
 
-    let user = JSON.parse(localStorage.user)
-    let creator_id = user.sub
-    const url = "http://localhost:3001/clips/store_clip/"
-    
+    let user = JSON.parse(localStorage.user);
+    let creator_id = user.sub;
+    const url = "http://localhost:3001/clips/store_clip/";
+
     axios.post(url, {
       start_timestamp: this.state.startTime,
       end_timestamp: this.state.endTime,
       clip_title: this.state.clipTitle,
       azure_url: this.state.videoUrl,
       creator_id: creator_id
-    })
+    });
   };
 
   // Selects a clip to display in the Clip component
@@ -134,7 +134,7 @@ class Clips extends React.Component {
       clipId: this.uuidv4(),
       start: start,
       end: end
-    }
+    };
 
     this.setState(
       {
@@ -145,18 +145,18 @@ class Clips extends React.Component {
         console.log(this.state.clipsList);
       }
     );
-  }
+  };
 
-  componentDidMount = () =>{
-    const time = convert(this.videoRef.current.duration)
-    console.log(time)
-    this.videoRef.current.addEventListener('loadedmetadata', () => {
-      console.log(this.videoRef.current.duration)
+  componentDidMount = () => {
+    const time = convert(this.videoRef.current.duration);
+    console.log(time);
+    this.videoRef.current.addEventListener("loadedmetadata", () => {
+      console.log(this.videoRef.current.duration);
       this.setState({
         duration: this.videoRef.current.duration
-      })
-    })
-  }
+      });
+    });
+  };
   render() {
     return (
       <div className="clip-component-container">
@@ -180,18 +180,31 @@ class Clips extends React.Component {
             </video>
             <br />
             <div className="clip-controls-div">
-              <PlayArrow className="play-arrow-icon" onClick={this.handleStart}></PlayArrow>
-              <Pause className="play-arrow-icon" onClick={this.handleEnd}></Pause>
-              <input name="title" placeholder="clip title" type="text" onChange={this.handleClipTitle} />
+              <PlayArrow
+                className="play-arrow-icon"
+                onClick={this.handleStart}
+              ></PlayArrow>
+              <Pause
+                className="play-arrow-icon"
+                onClick={this.handleEnd}
+              ></Pause>
+              <input
+                name="title"
+                placeholder="clip title"
+                type="text"
+                onChange={this.handleClipTitle}
+              />
               <button onClick={this.handleTrim}>Create Clip</button>
               <button onClick={this.handleSave}>Export Clip</button>
             </div>
           </div>
 
-          {this.state.duration ? <ClipSlider 
-            duration={this.state.duration}
-            handleSliderClip={this.handleSliderClip}
-          /> : null}
+          {this.state.duration ? (
+            <ClipSlider
+              duration={this.state.duration}
+              handleSliderClip={this.handleSliderClip}
+            />
+          ) : null}
 
           <div className="clip-gallery-container">
             <h1>Your clips</h1>
@@ -217,11 +230,11 @@ class Clips extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     videoUrl: state.videoUrl,
     videoTitle: state.videoTitle
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(Clips);
