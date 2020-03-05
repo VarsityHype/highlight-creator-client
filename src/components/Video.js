@@ -1,33 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
+import PlaylistNames from './PlaylistNames'
 import axios from 'axios'
 
 function Video(props) {
-
-    
-    const [playlistData, setPlaylistData] = useState({})
-
-    useEffect(() => {
-        const url = ''
-        fetch(url)
-        .then(response => response.json())
-        .then(json => {
-            const playlists = json.map((playlist) => {
-
-
-                return (<>
-                
-                    
-                
-                </>)
-            })
-            setPlaylistData(playlists)
-        })
-    }, [])
 
     const getUrlAndSeeVideo = (videoUrl, videoTitle) => {
         props.getUrl(videoUrl, videoTitle)
@@ -61,9 +37,9 @@ function Video(props) {
                 let videoTitle = video.title
                 
                 return(<>
-                        <div className="container video-container" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
+                        <div className="container">
                             
-                                <div className="video-div-inner">
+                                <div className="video-div-inner video-container" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
                                     <video
                                         id="vid1"
                                         className="azuremediaplayer amp-default-skin"
@@ -83,14 +59,7 @@ function Video(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <FormControl>
-                                    <InputLabel id="add-to-playlist">Add to playlist</InputLabel>
-                                    <Select labelId="add-to-playlist">
-                                        <MenuItem value={10}>Ten</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <PlaylistNames />
 
                                 <p>{video.description}</p>
 
@@ -103,11 +72,11 @@ function Video(props) {
     }, [])  
 
     return (<>
+
         <div className="test">
-        {videoData}
+            {videoData}
         </div>
 
-    
     </>)
 
 }
