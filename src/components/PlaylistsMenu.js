@@ -20,23 +20,34 @@ function PlaylistsMenu() {
         axios.post(url, {
             newPlaylist
         })
+    }
 
+    const goToPlaylist = () => {
 
     }
 
-    const [playlistData, setPlaylistData] = useState({})
+    const [playlistData, setPlaylistData] = useState([])
 
     useEffect(() => {
-        const url = ''
-        fetch(url)
+        const url = 'http://localhost:3001/playlists/get-playlists/'
+        let token = localStorage.jwt
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
         .then(response => response.json())
         .then(json => {
-            const playlists = json.map((playlist) => {
-
+            const playlists = Object.keys(json).map((playlist) => {
+                let title = json[playlist].title
 
                 return (<>
                 
-                    
+                    <div onClick={() => goToPlaylist()} className="playlist-titles-div">
+                        <p>{title}</p>
+                    </div>
                 
                 </>)
             })
@@ -47,9 +58,12 @@ function PlaylistsMenu() {
     return (<>
     
         <h1>Playlists</h1>
-        <input name="title" placeholder="playlist title" onChange={handleChange} />
-        <input name="description" placeholder="playlist description" onChange={handleChange} />
-        <button onClick={() => createPlaylists()}>Create a playlist</button>
+        {playlistData}
+        <div>
+            <input name="title" placeholder="playlist title" onChange={handleChange} />
+            <input name="description" placeholder="playlist description" onChange={handleChange} />
+            <button onClick={() => createPlaylists()}>Create a playlist</button>
+        </div>
 
     </>)
 

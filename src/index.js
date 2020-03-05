@@ -15,12 +15,14 @@ import NavBar from "./components/NavBar"
 import UploadVideo from "./components/UploadVideo";
 import Video from "./components/Video"
 import PlaylistsMenu from "./components/PlaylistsMenu"
+//import {persistVideoUrl} from "./utils/persistStates"
 import axios from 'axios'
 
 // CSS IMPORTS
 import './css/AppBar.css'
 import './css/Video.css'
 import './css/App.css'
+import './css/PlaylistsMenu.css'
 
 // axios authorization headers
 
@@ -41,9 +43,15 @@ const onRedirectCallback = appState => {
 };
 
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+const videoUrl = localStorage.getItem('videoUrl')
+
+
+
+//persistVideoUrl(videoUrl)
+
 ReactDOM.render(
   <Provider store={store}>
   <Auth0Provider

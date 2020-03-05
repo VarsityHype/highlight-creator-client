@@ -1,5 +1,5 @@
 const initialState = {
-  videoUrl: '',
+  videoUrl: null,
   videoTitle: ''
 }
 
@@ -12,6 +12,8 @@ const reducer = (state = initialState, action) => {
       videoTitle: action.videoTitle
     }
   }
+
+  return state 
 
 }
 
