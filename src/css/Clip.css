@@ -12,11 +12,11 @@
 }
 
 .clip-controls-div {
-  background-color: whitesmoke;
+  background-color: transparent;
   margin: 1rem;
   padding: 1rem;
 }
 
 .video-time-header {
-  color: black;
+  color:#fff;
 }

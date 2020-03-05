@@ -1,6 +1,7 @@
 // src/components/Profile.js
 
 import React, { Fragment } from "react";
+import PlaylistNames from "./PlaylistNames"
 import { useAuth0 } from "../react-auth0-spa";
 
 const Profile = () => {
@@ -12,11 +13,10 @@ const Profile = () => {
 
   return (
     <Fragment>
-      <img src={user.picture} alt="Profile" />
-
-      <h2>{user.name}</h2>
+      <img src={user.picture} alt="Profile" width="100px" />
+      <h2>{user.nickname}</h2>
       <p>{user.email}</p>
-      <code>{JSON.stringify(user, null, 2)}</code>
+      <PlaylistNames />
     </Fragment>
   );
 };

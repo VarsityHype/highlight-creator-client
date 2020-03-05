@@ -69,8 +69,9 @@ class UploadVideo extends Component {
                         <TextField id="outlined-basic" label="Description" variant="outlined" type="text" name="description" onChange={this.onHandleTitleDescriptionChange} />
                     </div>
 
-                    <div>
+                    <div className="overlay">
                         <input type="file" onChange={this.onHandleChange} />
+                        <div className="upload-button">Video</div>
                     </div>
                     <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
                 </div>

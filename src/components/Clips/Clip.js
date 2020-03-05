@@ -172,7 +172,7 @@ class Clips extends React.Component {
 
           <div className="clip-gallery-container">
             <h1>Your clips</h1>
-            <button onClick={this.handleReturnToVideo}>Return to Main Video</button>
+            <button className="upload-button" onClick={this.handleReturnToVideo}>Return to Main Video</button>
             <ClipsGallery
               clipsList={this.state.clipsList}
               url={this.state.videoUrl}

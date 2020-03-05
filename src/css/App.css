@@ -7,22 +7,40 @@ body{
     
 }
 
+.overlay{
+    width:50px;
+    height:50px;
+}
+
 .textField{
     padding: 10px;
     margin-left: 10px;
 }
 
 input[type="file"] {
+    position:absolute;
+    width:200px;
+    height:40px;
+    margin-top: 0px;
+    z-index:10;
+    opacity:0;
+}
+
+
+
+.upload-button{
     padding: 10px;
     background-color: transparent;
     border-radius: 2em;
-    border: 0.2em solid #e7e7e7;
-    color: #d6d6d6;
+    border: 0.2em solid rgba(1, 177, 201, 0.849);
+    color: rgba(1, 177, 201, 0.849);
     cursor: pointer;
-    font-size: 2vmin;
+    font-size: 1.5vmin;
     padding: 0.7em 1.5em;
     text-transform: uppercase;
     transition: all 0.25s ease;
+    margin-top:0px;
+
 }
 
 
