@@ -26,7 +26,7 @@ import './css/App.css'
 
 let user = JSON.parse(localStorage.user)
 let creator_id = user.sub
-axios.defaults.headers.common['Authorization'] = localStorage.jwt;
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.jwt}`;
 axios.defaults.headers.common['request_user_id'] = creator_id;
 
 // A function that routes the user to the right place

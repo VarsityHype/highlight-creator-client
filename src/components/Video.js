@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+import PlaylistNames from './PlaylistNames'
 import axios from 'axios'
 
 function Video(props) {
@@ -12,7 +13,7 @@ function Video(props) {
     const addToPlaylist = () => {
         const url = ''    
         axios.post(url, {
-            
+
         })
     }
 
@@ -20,7 +21,14 @@ function Video(props) {
     
 
     useEffect((props) => {
-        fetch('http://localhost:3001/video/')
+        let token = localStorage.jwt
+        fetch('http://localhost:3001/video/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "Authorization": `Bearer ${token}`
+            },
+        })
         .then(response => response.json())
         .then(json => {
             const videos = json.map((video) => {
@@ -54,6 +62,7 @@ function Video(props) {
                                         </div>
                                     </div>
                                 </div>
+                                <PlaylistNames />
 
                                 <button className="upload-button" onClick={() => addToPlaylist()}>Add to playlist</button>
 
@@ -68,10 +77,9 @@ function Video(props) {
     return (<>
         <div className="title"><h1>Latest Videos</h1></div>
         <div className="test">
-        {videoData}
+            {videoData}
         </div>
 
-    
     </>)
 
 }
