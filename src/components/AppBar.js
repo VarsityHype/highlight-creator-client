@@ -166,6 +166,7 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
+    <div classname="top">
     <div className={classes.grow}>
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
         <Toolbar>
@@ -208,7 +209,9 @@ export default function PrimarySearchAppBar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+        {renderMenu}
+        
+    </div>
     </div>
   );
 }

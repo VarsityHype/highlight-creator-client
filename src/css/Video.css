@@ -6,12 +6,18 @@
 
 }
 .title{
+    background-color: rgba(5, 5, 5, 0.5);
+    background-size: 100%;
     text-align: center;
-    margin: 35px;
     font-size: 2vmin;
-    padding: 60px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4em;
+    border-radius: 1em;
+    width: 100%;
+}
+
+.paragraph{
+    background-color: rgba(5, 5, 5, 0.2);
+    width: auto;
+
 }
 .video-div-inner {
     margin: 0rem;    

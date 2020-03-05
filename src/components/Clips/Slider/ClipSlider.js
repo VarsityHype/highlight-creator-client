@@ -6,6 +6,10 @@ import { msToTime } from "../../../utils/helpers";
 import PlayArrow from "@material-ui/icons/PlayArrow";
 import Pause from "@material-ui/icons/Pause";
 import "../../../css/Clip.css";
+
+const color = {
+  color: "#f69953"
+}
 const useStyles = makeStyles({
   // root: {
   //   width: 300
@@ -54,6 +58,7 @@ const ClipSlider = (props) => {
         <div className="clip-controls-div">
         <Typography id="range-slider" gutterBottom></Typography>
         <Slider
+          style = {color}
           value={value}
           onChange={handleChange}
           min={0}
