@@ -30,21 +30,24 @@ function Video(props) {
                 
                 return(<>
                         <div className="container video-container" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
+                        
                             
                                 <div className="video-div-inner">
-                                    <video
-                                        id="vid1"
-                                        className="azuremediaplayer amp-default-skin"
-                                        width="340"
-                                        height="200"
-                                        poster=""
-                                        autoPlay={false}
-                                    >
-                                        <source
-                                        src={videoUrl}
-                                        type="video/mp4"
-                                        />
-                                    </video>
+                                    <div className="vidvid">
+                                        <video
+                                            id="vid1"
+                                            className="azuremediaplayer amp-default-skin"
+                                            width="280"
+                                            height="140"
+                                            poster=""
+                                            autoPlay={false}
+                                        >
+                                            <source
+                                            src={videoUrl}
+                                            type="video/mp4"
+                                            />
+                                        </video>
+                                    </div>
                                     <div className="title-description-div">
                                         <div>
                                             <h1 >{videoTitle}</h1>
@@ -52,8 +55,7 @@ function Video(props) {
                                     </div>
                                 </div>
 
-                                <button onClick={() => addToPlaylist()}>Add to playlist</button>
-                                <p>{video.description}</p>
+                                <button className="upload-button" onClick={() => addToPlaylist()}>Add to playlist</button>
 
                             </div>
 
@@ -64,6 +66,7 @@ function Video(props) {
     }, [])  
 
     return (<>
+        <div className="title"><h1>Latest Videos</h1></div>
         <div className="test">
         {videoData}
         </div>
