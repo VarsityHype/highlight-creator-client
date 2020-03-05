@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 
 function PlaylistsMenu() {
 
-//clip id, user id, playlist id
-
     const [newPlaylist, setNewPlaylist] = useState({})
 
     const handleChange = (e) => {
@@ -20,23 +18,26 @@ function PlaylistsMenu() {
         axios.post(url, {
             newPlaylist
         })
-
-
     }
 
-    const [playlistData, setPlaylistData] = useState({})
+    const goToPlaylist = () => {
+        //function to go to playlist goes here
+    }
+
+    const [playlistData, setPlaylistData] = useState([])
 
     useEffect(() => {
-        const url = ''
-        fetch(url)
-        .then(response => response.json())
+        const url = 'http://localhost:3001/playlists/get-playlists/'
+        axios.get(url)
         .then(json => {
-            const playlists = json.map((playlist) => {
-
+            const playlists = Object.keys(json.data).map((playlist) => {
+                let title = json.data[playlist].title
 
                 return (<>
                 
-                    
+                    <div onClick={() => goToPlaylist()} className="playlist-titles-div">
+                        <p>{title}</p>
+                    </div>
                 
                 </>)
             })
@@ -47,9 +48,12 @@ function PlaylistsMenu() {
     return (<>
     
         <h1>Playlists</h1>
-        <input name="title" placeholder="playlist title" onChange={handleChange} />
-        <input name="description" placeholder="playlist description" onChange={handleChange} />
-        <button onClick={() => createPlaylists()}>Create a playlist</button>
+        {playlistData}
+        <div>
+            <input name="title" placeholder="playlist title" onChange={handleChange} />
+            <input name="description" placeholder="playlist description" onChange={handleChange} />
+            <button onClick={() => createPlaylists()}>Create a playlist</button>
+        </div>
 
     </>)
 
