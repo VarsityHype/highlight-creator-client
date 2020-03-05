@@ -8,11 +8,12 @@ body{
 }
 
 .textField{
-    background-color: tomato;
+    padding: 10px;
     margin-left: 10px;
 }
 
 input[type="file"] {
+    padding: 10px;
     background-color: transparent;
     border-radius: 2em;
     border: 0.2em solid #e7e7e7;

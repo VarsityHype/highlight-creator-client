@@ -1,6 +1,7 @@
 #footer {
-  left: 0;
+  position: absolute;
   bottom: 0;
   background: "transparent";
   box-shadow: "none";
+  width: 100%;
 }

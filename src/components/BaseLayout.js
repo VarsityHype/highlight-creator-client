@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 const BaseLayout = props => {
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <AppBar />
       {props.children}
       <Footer />
