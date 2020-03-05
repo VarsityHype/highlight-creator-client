@@ -1,11 +1,13 @@
 import React from "react";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
+import PlayArrow from "@material-ui/icons/PlayArrow";
+import Pause from "@material-ui/icons/Pause";
 import ClipSlider from "./Slider/ClipSlider"
 import PlaylistNames from "../PlaylistNames"
 import axios from "axios";
-import {convert, toSeconds, format} from '../../utils/helpers'
+import { convert, toSeconds, format } from "../../utils/helpers";
 import "../../css/Clip.css";
 
 class Clips extends React.Component {
@@ -30,13 +32,12 @@ class Clips extends React.Component {
     this.videoRef = React.createRef();
   }
 
-
-  handleClipTitle = (title) => {
+  handleClipTitle = title => {
     this.setState({
       ...this.state,
       clipTitle: title
     });
-  }
+  };
 
   // Randomly generates an id
   uuidv4 = () => {
@@ -60,21 +61,21 @@ class Clips extends React.Component {
     this.setState(
       {
         ...this.state,
-        clipsList: this.state.clipsList.concat(newClip),
+        clipsList: this.state.clipsList.concat(newClip)
       },
       () => {
         console.log(this.state.clipsList);
       }
     );
 
-    const url = "http://localhost:3001/clips/store_clip/"
-    
+    const url = "http://localhost:3001/clips/store_clip/";
+
     axios.post(url, {
       start_timestamp: this.state.startTime,
       end_timestamp: this.state.endTime,
       clip_title: this.state.clipTitle,
-      azure_url: this.state.videoUrl,
-    })
+      azure_url: this.state.videoUrl
+    });
   };
 
   // Selects a clip to display in the Clip component
@@ -89,8 +90,8 @@ class Clips extends React.Component {
   handleReturnToVideo = () => {
     this.setState({
       clipPlaying: false
-    })
-  }
+    });
+  };
 
   // Finds a clip by its ID and removes it from clips gallery
   handleDeleteClip = clip => {
@@ -119,13 +120,13 @@ class Clips extends React.Component {
   };
 
   // Loads the video's entire duration for clipping
-  componentDidMount = () =>{
-    this.videoRef.current.addEventListener('loadedmetadata', () => {
+  componentDidMount = () => {
+    this.videoRef.current.addEventListener("loadedmetadata", () => {
       this.setState({
         duration: this.videoRef.current.duration
-      })
-    })
-  }
+      });
+    });
+  };
   render() {
     return (
       <div className="clip-component-container">
@@ -156,23 +157,26 @@ class Clips extends React.Component {
             </div>
             <br />
             <div>
-              {this.state.duration ? 
-              this.state.clipPlaying ? null :
-              (
-                <ClipSlider
-                  duration={this.state.duration}
-                  handleSliderClip={this.handleSliderClip}
-                  handleClipTitle={this.handleClipTitle}
-                  handleTrim={this.handleTrim}
-                  handleSave={this.handleSave}
-                />
+              {this.state.duration ? (
+                this.state.clipPlaying ? null : (
+                  <ClipSlider
+                    duration={this.state.duration}
+                    handleSliderClip={this.handleSliderClip}
+                    handleClipTitle={this.handleClipTitle}
+                    handleTrim={this.handleTrim}
+                    handleSave={this.handleSave}
+                  />
+                )
               ) : null}
             </div>
           </div>
 
           <div className="clip-gallery-container">
             <h1>Your clips</h1>
-            <button className="upload-button" onClick={this.handleReturnToVideo}>Return to Main Video</button>
+
+            <button onClick={this.handleReturnToVideo}>
+              Return to Main Video
+            </button>
             <ClipsGallery
               clipsList={this.state.clipsList}
               url={this.state.videoUrl}
@@ -188,11 +192,13 @@ class Clips extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
+
     videoUrl: state.videoUrl ?? localStorage.getItem("videoUrl"),
     videoTitle: state.videoTitle 
   }
 }
+
 
 export default connect(mapStateToProps)(Clips);
