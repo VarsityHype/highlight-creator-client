@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 import ClipSlider from "./Slider/ClipSlider"
-import PlayArrow from "@material-ui/icons/PlayArrow"
-import Pause from "@material-ui/icons/Pause"
+import PlaylistNames from "../PlaylistNames"
 import axios from "axios";
 import {convert, toSeconds, format} from '../../utils/helpers'
 import "../../css/Clip.css";
@@ -152,6 +151,9 @@ class Clips extends React.Component {
                 <source src={this.state.videoUrl} />
               </video>
             )}
+            <div>
+              <PlaylistNames />
+            </div>
             <br />
             <div>
               {this.state.duration ? 
@@ -188,8 +190,8 @@ class Clips extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    videoUrl: state.videoUrl,
-    videoTitle: state.videoTitle
+    videoUrl: state.videoUrl ?? localStorage.getItem("videoUrl"),
+    videoTitle: state.videoTitle 
   }
 }
 
