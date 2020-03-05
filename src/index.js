@@ -30,6 +30,7 @@ let user = JSON.parse(localStorage.user)
 let creator_id = user.sub
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.jwt}`;
 axios.defaults.headers.common['request_user_id'] = creator_id;
+axios.defaults.headers.common['Content-Type'] = 'applicaton/json'
 
 // A function that routes the user to the right place
 // after login

@@ -40,7 +40,6 @@ class UploadVideo extends Component {
         })
         .then(res => {
             let info = JSON.parse(localStorage.user)
-            let token = localStorage.jwt
             let uploader_id = info.sub
             let video = {
                 uploader_id: `${uploader_id}`,
@@ -49,14 +48,7 @@ class UploadVideo extends Component {
                 description: description,
                 thumbnail: `${this.state.thumbnail}`
                 };
-                fetch('http://localhost:3001/upload/uploaded', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
-                  },
-                  body: JSON.stringify(video)
-                }).then(response => response.json())
+                axios.post('http://localhost:3001/upload/uploaded', video).then(response => response.json())
             
         })
     }

@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 
 function PlaylistsMenu() {
 
-//clip id, user id, playlist id
-
     const [newPlaylist, setNewPlaylist] = useState({})
 
     const handleChange = (e) => {
@@ -23,25 +21,17 @@ function PlaylistsMenu() {
     }
 
     const goToPlaylist = () => {
-
+        //function to go to playlist goes here
     }
 
     const [playlistData, setPlaylistData] = useState([])
 
     useEffect(() => {
         const url = 'http://localhost:3001/playlists/get-playlists/'
-        let token = localStorage.jwt
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => response.json())
+        axios.get(url)
         .then(json => {
-            const playlists = Object.keys(json).map((playlist) => {
-                let title = json[playlist].title
+            const playlists = Object.keys(json.data).map((playlist) => {
+                let title = json.data[playlist].title
 
                 return (<>
                 

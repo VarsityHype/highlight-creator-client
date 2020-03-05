@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 import {connect} from 'react-redux'
 
 function Video(props) {
@@ -12,21 +13,13 @@ function Video(props) {
     const [videoData, setVideoData] = useState([])
     
 
-    useEffect((props) => {
-        let token = localStorage.jwt
-        fetch('http://localhost:3001/video/', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              "Authorization": `Bearer ${token}`
-            },
-        })
-        .then(response => response.json())
+    useEffect(() => {
+        axios.get('http://localhost:3001/video/')
         .then(json => {
-            const videos = json.map((video) => {
-
-                let videoUrl = video.azure_url
-                let videoTitle = video.title
+            console.log(json.data)
+            const videos = Object.keys(json.data).map((video) => {
+                let videoUrl = json.data[video].azure_url
+                let videoTitle = json.data[video].title
                 
                 return(<>
                         <div className="container video-container" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
