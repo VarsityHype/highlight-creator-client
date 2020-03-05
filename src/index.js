@@ -15,6 +15,7 @@ import NavBar from "./components/NavBar"
 import UploadVideo from "./components/UploadVideo";
 import Video from "./components/Video"
 import PlaylistsMenu from "./components/PlaylistsMenu"
+import Profile from "./components/Profile"
 import axios from 'axios'
 
 // CSS IMPORTS
@@ -61,6 +62,7 @@ ReactDOM.render(
           <Route path="/upload" component={UploadVideo} />
           <Route path="/video" component={Video} />
           <Route path="/playlists" component={PlaylistsMenu} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </BrowserRouter>
   </Auth0Provider>

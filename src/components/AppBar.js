@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Profile from "./Profile"
 import { useAuth0 } from "../react-auth0-spa";
 
 const useStyles = makeStyles(theme => ({
@@ -76,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function PrimarySearchAppBar() {
 
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -119,7 +121,7 @@ export default function PrimarySearchAppBar() {
       {isAuthenticated && <div>
         <MenuItem onClick={() => logout()}>Log out</MenuItem>
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        <MenuItem component={Link} to="/profile">My account</MenuItem>
       </div>}
     </Menu>
   );

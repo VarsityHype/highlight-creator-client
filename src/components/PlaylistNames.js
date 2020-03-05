@@ -35,7 +35,6 @@ function PlaylistNames() {
     return (<>
     
             <FormControl>
-                <InputLabel id="add-to-playlist">Add to playlist</InputLabel>
                 <Select labelId="add-to-playlist">
                     {playlistData}
                 </Select>

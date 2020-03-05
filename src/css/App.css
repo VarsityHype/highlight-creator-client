@@ -6,6 +6,10 @@ body{
 	font: 14px/19px  "Helvetica", "Arial", sans-serif;
     
 }
+.overlay{
+    width:50px;
+    height:50px;
+}
 
 .textField{
     padding: 10px;
@@ -13,16 +17,12 @@ body{
 }
 
 input[type="file"] {
-    padding: 10px;
-    background-color: transparent;
-    border-radius: 2em;
-    border: 0.2em solid #e7e7e7;
-    color: #d6d6d6;
-    cursor: pointer;
-    font-size: 2vmin;
-    padding: 0.7em 1.5em;
-    text-transform: uppercase;
-    transition: all 0.25s ease;
+    position:absolute;
+    width:200px;
+    height:40px;
+    margin-top: 0px;
+    z-index:10;
+    opacity:0;
 }
 
 
@@ -38,6 +38,9 @@ input[type="file"] {
     padding: 0.7em 1.5em;
     text-transform: uppercase;
     transition: all 0.25s ease;
+    position:absolute;
+    margin-top:0px;
+
 }
 
 
