@@ -24,6 +24,7 @@ import './css/AppBar.css'
 import './css/Video.css'
 import './css/App.css'
 import './css/PlaylistsMenu.css'
+import './css/Footer.css'
 
 // axios authorization headers
 
@@ -72,7 +73,7 @@ ReactDOM.render(
             <Route path="/clips" component={Clip} />
             <Route path="/upload" component={UploadVideo} />
             <Route path="/video" component={Video} />
-            <Route path="/playlist" component={PlaylistsMenu} />
+            <Route path="/playlists" component={PlaylistsMenu} />
           </Switch>
         </BaseLayout>
 

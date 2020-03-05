@@ -48,8 +48,6 @@ function Video(props) {
                                     </div>
                                 </div>
 
-                                <button className="upload-button" onClick={() => addToPlaylist()}>Add to playlist</button>
-
                             </div>
 
                 </>)

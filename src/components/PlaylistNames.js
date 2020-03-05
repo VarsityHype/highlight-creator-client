@@ -21,19 +21,11 @@ function PlaylistNames(props) {
 
     useEffect(() => {
         const url = 'http://localhost:3001/playlists/get-playlists/'
-        const token = localStorage.jwt
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        })
-        .then(response => response.json())
+        axios.get(url)
         .then(json => {
-            const playlists = Object.keys(json).map((playlist) => {
-                let title = json[playlist].title
-                let playlist_reference_id = json[playlist].id
+            const playlists = Object.keys(json.data).map((playlist) => {
+                let title = json.data[playlist].title
+                let playlist_reference_id = json.data[playlist].id
 
                 return (<>
                 
