@@ -20,3 +20,19 @@
 .video-time-header {
   color:#fff;
 }
+
+.playlist-names-div {
+  background-color: whitesmoke;
+}
+
+.add-to-playlist-p {
+  color: black;
+}
+
+.remove-video-div {
+  display: inline;
+}
+
+.remove-video-button {
+  margin-left: 5rem;
+}

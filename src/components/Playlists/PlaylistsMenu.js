@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react'
+import TextField from '@material-ui/core/TextField'
+import CloseIcon from '@material-ui/icons/Close'
 import axios from 'axios'
 import {connect} from 'react-redux'
 
 function PlaylistsMenu(props) {
 
+    // create playlist
     const [newPlaylist, setNewPlaylist] = useState({})
 
     const handleChange = (e) => {
@@ -13,13 +16,24 @@ function PlaylistsMenu(props) {
         })
     }
 
-    const createPlaylists = () => {
+    const createPlaylist = () => {
         const url = 'http://localhost:3001/playlists/create-playlist'
         axios.post(url, {
             newPlaylist
         })
+        .then(window.location.href = '/your-playlists')
     }
 
+    // delete playlist
+    const deletePlaylist = (playlistId) => {
+        const url = 'http://localhost:3001/playlists/delete-playlist'
+        axios.post(url, {
+            id: playlistId
+        })
+        .then(window.location.href = '/your-playlists')
+    }
+
+    // go to clicked playlist 
     const getplaylistIdAndGoToPlaylist = (playlistId, playlistTitle) => {
         localStorage.setItem('playlistId', playlistId)
         localStorage.setItem('playlistTitle', playlistTitle)
@@ -39,8 +53,13 @@ function PlaylistsMenu(props) {
 
                 return (<>
                 
-                    <div onClick={() => getplaylistIdAndGoToPlaylist(playlistId, playlistTitle)} className="playlist-titles-div">
-                        <p>{playlistTitle}</p>
+                    <div className="playlist-titles-div">
+                        <div className="playlist-div" onClick={() => getplaylistIdAndGoToPlaylist(playlistId, playlistTitle)}>
+                            <p>{playlistTitle}</p>
+                        </div>
+                        <div>
+                            <CloseIcon className="remove-playlist-button" onClick={() => deletePlaylist(playlistId)}>Remove playlist</CloseIcon>
+                        </div>
                     </div>
                 
                 </>)
@@ -51,12 +70,12 @@ function PlaylistsMenu(props) {
 
     return (<>
     
-        <h1>Playlists</h1>
+        <h1>Your Playlists</h1>
         {playlistData}
-        <div>
-            <input name="title" placeholder="playlist title" onChange={handleChange} />
-            <input name="description" placeholder="playlist description" onChange={handleChange} />
-            <button onClick={() => createPlaylists()}>Create a playlist</button>
+        <div className="create-playlist-div">
+            <TextField id="outlined-basic" label="title" variant="outlined" name="title" placeholder="playlist title" onChange={handleChange} />
+            <TextField id="outlined-basic" label="description" variant="outlined" name="description" placeholder="playlist description" onChange={handleChange} />
+            <button className="upload-button" onClick={() => createPlaylist()}>Create a playlist</button>
         </div>
 
     </>)

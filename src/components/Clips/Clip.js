@@ -117,6 +117,14 @@ class Clips extends React.Component {
       });
     });
   };
+
+  deleteVideo = (videoUrl) => {
+    const url = 'http://localhost:3001/video/delete-video'
+    axios.post(url, {
+      azure_url: videoUrl
+    })
+  }
+
   render() {
     return (
       <div className="clip-component-container">
@@ -142,8 +150,12 @@ class Clips extends React.Component {
                 <source src={this.state.videoUrl} />
               </video>
             )}
-            <div>
+            <div className="playlist-names-div">
+              <div className="remove-video-div">
+                <p className="add-to-playlist-p">Add to playlist:</p>
+              </div>
               <PlaylistNames />
+              <button className="remove-video-button" onClick={() => this.deleteVideo(this.state.videoUrl)}>Remove from playlist</button>
             </div>
             <br />
             <div>

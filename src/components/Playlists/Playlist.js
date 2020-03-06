@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import RemoveVideoFromPlaylist from './RemoveVideoFromPlaylist'
 
 function Playlist(props) {
+
+    const removeVideo = (videoUrl) => {
+        const url = 'http://localhost:3001/playlists/remove-from-playlist'
+        axios.post(url, {
+            source_id: videoUrl
+        })
+    }
 
     const [playlistData, setPlaylistData] = useState([])
 
@@ -16,19 +22,22 @@ function Playlist(props) {
 
                 return (<>
                 
+                    <div>
                         <video
                             id="vid1"
                             className="azuremediaplayer amp-default-skin"
                             controls
-                            autoPlay
+                            autoPlay={false}
                             width="640"
                             height="400"
+                            onEnded={() => console.log('ended')}
                             poster="poster.jpg"
                         >
                             <source src={videoUrl} />
                         </video>
-                        <RemoveVideoFromPlaylist />
-                
+                        <button className="upload-button" onClick={() => removeVideo(videoUrl)}>Remove from playlist</button>
+                    </div>
+
                 </>)
             })
             setPlaylistData(playlistVideos)
