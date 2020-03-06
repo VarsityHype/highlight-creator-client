@@ -2,12 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
-import PlayArrow from "@material-ui/icons/PlayArrow";
-import Pause from "@material-ui/icons/Pause";
 import ClipSlider from "./Slider/ClipSlider"
-import PlaylistNames from "../PlaylistNames"
+import PlaylistNames from "../Playlists/PlaylistNames"
 import axios from "axios";
-import { convert, toSeconds, format } from "../../utils/helpers";
 import "../../css/Clip.css";
 
 class Clips extends React.Component {
@@ -68,14 +65,6 @@ class Clips extends React.Component {
       }
     );
 
-    const url = "http://localhost:3001/clips/store_clip/";
-
-    axios.post(url, {
-      start_timestamp: this.state.startTime,
-      end_timestamp: this.state.endTime,
-      clip_title: this.state.clipTitle,
-      azure_url: this.state.videoUrl
-    });
   };
 
   // Selects a clip to display in the Clip component
@@ -113,7 +102,8 @@ class Clips extends React.Component {
 
   // Sends the list of clips to database
   handleSave = () => {
-    axios.post("http://localhost:3001/saveClip", {
+    const url = "http://localhost:3001/clips/store_clip/";
+    axios.post(url, {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
     });

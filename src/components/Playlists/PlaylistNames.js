@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import axios from 'axios'

@@ -13,9 +13,8 @@ import Test from "./components/Test";
 import Clip from "./components/Clips/Clip";
 import BaseLayout from "./components/BaseLayout";
 import UploadVideo from "./components/UploadVideo";
-
 import Video from "./components/Video"
-import PlaylistsMenu from "./components/PlaylistsMenu"
+import PlaylistsMenu from "./components/Playlists/PlaylistsMenu"
 import Profile from "./components/Profile"
 import axios from 'axios'
 
@@ -34,7 +33,6 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.jwt}`;
 axios.defaults.headers.common['request_user_id'] = creator_id;
 axios.defaults.headers.common['Content-Type'] = 'applicaton/json'
 
-
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = appState => {
@@ -49,12 +47,6 @@ const onRedirectCallback = appState => {
 const store = createStore(
   reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-
-const videoUrl = localStorage.getItem('videoUrl')
-
-
-
-//persistVideoUrl(videoUrl)
 
 ReactDOM.render(
   <Provider store={store}>
