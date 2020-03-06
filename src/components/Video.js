@@ -24,14 +24,14 @@ function Video(props) {
 
                         <div className="container video-container">        
                                 <div className="video-div-inner">
-                                    <div className="vidvid">
+                                    <div className="vidvid" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
                                         <video
                                             id="vid1"
                                             className="azuremediaplayer amp-default-skin"
                                             width="280"
                                             height="140"
                                             poster=""
-                                            autoPlay={true}
+                                            autoPlay={false}
                                         >
                                             <source
                                             src={videoUrl}
