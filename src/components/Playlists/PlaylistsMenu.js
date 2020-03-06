@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 
-function PlaylistsMenu() {
+function PlaylistsMenu(props) {
 
     const [newPlaylist, setNewPlaylist] = useState({})
 
@@ -20,8 +20,11 @@ function PlaylistsMenu() {
         })
     }
 
-    const goToPlaylist = () => {
-        //function to go to playlist goes here
+    const getplaylistIdAndGoToPlaylist = (playlistId, playlistTitle) => {
+        localStorage.setItem('playlistId', playlistId)
+        localStorage.setItem('playlistTitle', playlistTitle)
+        props.getPlaylistId(playlistId, playlistTitle)
+        props.history.push('playlist')
     }
 
     const [playlistData, setPlaylistData] = useState([])
@@ -31,12 +34,13 @@ function PlaylistsMenu() {
         axios.get(url)
         .then(json => {
             const playlists = Object.keys(json.data).map((playlist) => {
-                let title = json.data[playlist].title
+                let playlistTitle = json.data[playlist].title
+                let playlistId = json.data[playlist].id
 
                 return (<>
                 
-                    <div onClick={() => goToPlaylist()} className="playlist-titles-div">
-                        <p>{title}</p>
+                    <div onClick={() => getplaylistIdAndGoToPlaylist(playlistId, playlistTitle)} className="playlist-titles-div">
+                        <p>{playlistTitle}</p>
                     </div>
                 
                 </>)
@@ -61,7 +65,7 @@ function PlaylistsMenu() {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
+        getPlaylistId: (newPlaylistId, newPlaylistTitle) => dispatch({type: 'PLAYLIST_INFO_SAVED', playlistId: newPlaylistId, playlistTitle: newPlaylistTitle})
     }
 }
 

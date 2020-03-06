@@ -16,6 +16,7 @@ import UploadVideo from "./components/UploadVideo";
 import Video from "./components/Video"
 import PlaylistsMenu from "./components/Playlists/PlaylistsMenu"
 import Profile from "./components/Profile"
+import Playlist from "./components/Playlists/Playlist"
 import axios from 'axios'
 
 // CSS IMPORTS
@@ -26,7 +27,6 @@ import './css/PlaylistsMenu.css'
 import './css/Footer.css'
 
 // axios authorization headers
-
 let user = JSON.parse(localStorage.user)
 let creator_id = user.sub
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.jwt}`;
@@ -65,7 +65,8 @@ ReactDOM.render(
             <Route path="/clips" component={Clip} />
             <Route path="/upload" component={UploadVideo} />
             <Route path="/video" component={Video} />
-            <Route path="/playlists" component={PlaylistsMenu} />
+            <Route path="/your-playlists" component={PlaylistsMenu} />
+            <Route path="/playlist" component={Playlist} />
           </Switch>
         </BaseLayout>
 

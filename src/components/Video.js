@@ -6,25 +6,23 @@ function Video(props) {
 
     const getUrlAndSeeVideo = (videoUrl, videoTitle) => {
         localStorage.setItem('videoUrl', videoUrl)
+        localStorage.setItem('videoTitle', videoTitle)
         props.getUrl(videoUrl, videoTitle)
         props.history.push("/clips")
     }
 
     const [videoData, setVideoData] = useState([])
     
-
     useEffect(() => {
         axios.get('http://localhost:3001/video/')
         .then(json => {
-            console.log(json.data)
             const videos = Object.keys(json.data).map((video) => {
                 let videoUrl = json.data[video].azure_url
                 let videoTitle = json.data[video].title
                 
                 return(<>
-                        <div className="container video-container" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
-                        
-                            
+
+                        <div className="container video-container">        
                                 <div className="video-div-inner">
                                     <div className="vidvid">
                                         <video
@@ -33,7 +31,7 @@ function Video(props) {
                                             width="280"
                                             height="140"
                                             poster=""
-                                            autoPlay={false}
+                                            autoPlay={true}
                                         >
                                             <source
                                             src={videoUrl}

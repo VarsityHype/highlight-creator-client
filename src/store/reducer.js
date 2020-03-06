@@ -1,6 +1,8 @@
 const initialState = {
   videoUrl: null,
-  videoTitle: ''
+  videoTitle: null,
+  playlistId: null,
+  playlistTitle: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +12,14 @@ const reducer = (state = initialState, action) => {
       ...state,
       videoUrl: action.videoUrl,
       videoTitle: action.videoTitle
+    }
+  }
+
+  if (action.type === 'PLAYLIST_INFO_SAVED') {
+    return {
+      ...state,
+      playlistId: action.playlistId,
+      playlistTitle: action.playlistTitle
     }
   }
 
