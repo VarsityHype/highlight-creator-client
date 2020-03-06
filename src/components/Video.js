@@ -6,13 +6,13 @@ function Video(props) {
 
     const getUrlAndSeeVideo = (videoUrl, videoTitle) => {
         localStorage.setItem('videoUrl', videoUrl)
+        localStorage.setItem('videoTitle', videoTitle)
         props.getUrl(videoUrl, videoTitle)
         props.history.push("/clips")
     }
 
     const [videoData, setVideoData] = useState([])
     
-
     useEffect(() => {
         axios.get('http://localhost:3001/video/')
         .then(json => {

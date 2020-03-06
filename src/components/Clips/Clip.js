@@ -186,7 +186,7 @@ const mapStateToProps = state => {
   return {
 
     videoUrl: state.videoUrl ?? localStorage.getItem("videoUrl"),
-    videoTitle: state.videoTitle 
+    videoTitle: state.videoTitle ?? localStorage.getItem("videoTitle")
   }
 }
 

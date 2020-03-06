@@ -157,7 +157,7 @@ export default function PrimarySearchAppBar() {
         <p>Profile</p>
       </MenuItem>
       <MenuItem>
-        <a className="menu-item-a-mobile" href="/playlists">Playlists</a>
+        <a className="menu-item-a-mobile" href="/your-playlists">Playlists</a>
       </MenuItem>
       <MenuItem>
         <a className="menu-item-a-mobile" href="/upload">Upload</a>
@@ -176,7 +176,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <MenuItem>
-              <a className="menu-item-a" href="/playlists">Playlists</a>
+              <a className="menu-item-a" href="/your-playlists">Playlists</a>
             </MenuItem>
             <MenuItem>
               <a className="menu-item-a" href="/video">Videos</a>
