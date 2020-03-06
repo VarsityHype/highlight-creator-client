@@ -20,7 +20,6 @@ class UploadVideo extends Component {
         })
     }
 
-
     onHandleTitleDescriptionChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -63,7 +62,7 @@ class UploadVideo extends Component {
             <form autoComplete="on">
                 <div>
                     <div className="textField">
-                        <TextField id="outlined-basic"  label="Title" variant="outlined" type="text" name="title"  onChange={this.onHandleTitleDescriptionChange} />
+                        <TextField id="outlined-basic" label="Title" variant="outlined" type="text" name="title" onChange={this.onHandleTitleDescriptionChange} />
                     </div>
                     <div className="textField">
                         <TextField id="outlined-basic" label="Description" variant="outlined" type="text" name="description" onChange={this.onHandleTitleDescriptionChange} />

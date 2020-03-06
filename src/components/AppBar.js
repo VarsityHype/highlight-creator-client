@@ -166,7 +166,7 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div classname="top">
+    <div className="top">
     <div className={classes.grow}>
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
         <Toolbar>
