@@ -18,21 +18,23 @@ import PlaylistsMenu from "./components/Playlists/PlaylistsMenu"
 import Profile from "./components/Profile"
 import Playlist from "./components/Playlists/Playlist"
 import axios from 'axios'
-
 // CSS IMPORTS
 import './css/AppBar.css'
 import './css/Video.css'
 import './css/App.css'
 import './css/PlaylistsMenu.css'
 import './css/Footer.css'
-
 // axios authorization headers
+try {
 let user = JSON.parse(localStorage.user)
 let creator_id = user.sub
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.jwt}`;
 axios.defaults.headers.common['request_user_id'] = creator_id;
 axios.defaults.headers.common['Content-Type'] = 'applicaton/json'
-
+}
+catch(err) {
+  //what do we want this error to do?
+}
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = appState => {
@@ -43,11 +45,9 @@ const onRedirectCallback = appState => {
   );
   console.log(window.location.pathname);
 };
-
 const store = createStore(
   reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-
 ReactDOM.render(
   <Provider store={store}>
     <Auth0Provider
@@ -57,7 +57,6 @@ ReactDOM.render(
       onRedirectCallback={onRedirectCallback}
     >
       <BrowserRouter>
-
         <BaseLayout>
           <Switch>
             <Route exact path="/" component={App} />
@@ -69,11 +68,9 @@ ReactDOM.render(
             <Route path="/playlist" component={Playlist} />
           </Switch>
         </BaseLayout>
-
       </BrowserRouter>
     </Auth0Provider>
   </Provider>,
   document.getElementById("root")
 );
-
 serviceWorker.unregister();
