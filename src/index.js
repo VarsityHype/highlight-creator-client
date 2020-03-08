@@ -17,7 +17,10 @@ import Video from "./components/Video"
 import PlaylistsMenu from "./components/Playlists/PlaylistsMenu"
 import Profile from "./components/Profile"
 import Playlist from "./components/Playlists/Playlist"
+import Highlights from './components/Highlights/Highlights'
+import SeeHighlight from './components/Highlights/SeeHighlight'
 import axios from 'axios'
+
 // CSS IMPORTS
 import './css/AppBar.css'
 import './css/Video.css'
@@ -66,6 +69,8 @@ ReactDOM.render(
             <Route path="/video" component={Video} />
             <Route path="/your-playlists" component={PlaylistsMenu} />
             <Route path="/playlist" component={Playlist} />
+            <Route path="/your-highlights" component={Highlights} />
+            <Route path="/highlight" component={SeeHighlight} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>

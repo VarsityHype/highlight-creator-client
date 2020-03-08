@@ -5,14 +5,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import axios from 'axios'
 
-function PlaylistNames(props) {
+function HighlightPlaylistNames(props) {
 
-    const addVideoToPlaylist = (videoUrl, playlist_reference_id) => {
+    const addHighlightToPlaylist = (highlightUrl, playlist_reference_id) => {
         const url = 'http://localhost:3001/playlists/add-to-playlist/'
         axios.post(url, {
             playlist_reference_id: playlist_reference_id,
-            source_id: videoUrl,
-            isClip: false
+            source_id: highlightUrl,
+            isClip: true
         })
     }
 
@@ -28,7 +28,7 @@ function PlaylistNames(props) {
 
                 return (<>
                 
-                    <MenuItem onClick={() => addVideoToPlaylist(props.videoUrl, playlist_reference_id)}>{title}</MenuItem>
+                    <MenuItem onClick={() => addHighlightToPlaylist(props.highlightUrl, playlist_reference_id)}>{title}</MenuItem>
                 
                 </>)
             })
@@ -39,6 +39,7 @@ function PlaylistNames(props) {
     return (<>
     
             <FormControl>
+                <h3>Add to playlist</h3>
                 <Select labelId="add-to-playlist">
                     {playlistData}
                 </Select>
@@ -50,8 +51,8 @@ function PlaylistNames(props) {
 
 const mapStateToProps = (state) => {
     return {
-        videoUrl: state.videoUrl ?? localStorage.getItem('videoUrl')
+        highlightUrl: state.highlightUrl ?? localStorage.getItem('highlightUrl')
     }
 }
 
-export default connect(mapStateToProps)(PlaylistNames)
+export default connect(mapStateToProps)(HighlightPlaylistNames)
