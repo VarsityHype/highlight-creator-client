@@ -4,8 +4,13 @@ import axios from 'axios'
 
 function Highlights(props) {
 
-    const getClipAndSeeHighlight = (clipUrl, clipTitle) => {
-
+    const getClipAndSeeHighlight = (highlightUrl, highlightTitle, highlightStart, highlightEnd) => {
+        localStorage.setItem('highlightUrl', highlightUrl)
+        localStorage.setItem('highlightTitle', highlightTitle)
+        localStorage.setItem('highlightStart', highlightStart)
+        localStorage.setItem('highlightEnd', highlightEnd)
+        props.getHighlightInfo(highlightUrl, highlightTitle, highlightStart, highlightEnd)
+        props.history.push('/highlight')
     }
 
     const [clipsData, setClipsData] = useState([])
@@ -35,6 +40,7 @@ function Highlights(props) {
                             >
                                 <source src={highlightUrl} />
                             </video>
+                            <button className="upload-button" onClick={() => getClipAndSeeHighlight(highlightUrl, title, start, end)}>View highlight</button>
                         </div>
                 
                 </>)
@@ -56,7 +62,9 @@ return (<>
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        getHighlightInfo: (newhighlightUrl, newhighlightTitle, newhighlightStart, newhighlightEnd) => dispatch({
+            type: 'HIGHLIGHT_INFO_SAVED', highlightUrl: newhighlightUrl, highlightTitle: newhighlightTitle, highlightStart: newhighlightStart, highlightEnd: newhighlightEnd
+        })
     }
 }
 

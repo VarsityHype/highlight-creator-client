@@ -137,14 +137,6 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -157,7 +149,13 @@ export default function PrimarySearchAppBar() {
         <p>Profile</p>
       </MenuItem>
       <MenuItem>
+        <a className="menu-item-a-mobile" href="/your-highlights">Highlights</a>
+      </MenuItem>
+      <MenuItem>
         <a className="menu-item-a-mobile" href="/your-playlists">Playlists</a>
+      </MenuItem>
+      <MenuItem>
+        <a className="menu-item-a-mobile" href="/video">Videos</a>
       </MenuItem>
       <MenuItem>
         <a className="menu-item-a-mobile" href="/upload">Upload</a>
@@ -175,6 +173,9 @@ export default function PrimarySearchAppBar() {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <MenuItem>
+              <a className="menu-item-a" href="/your-highlights">Highlights</a>
+            </MenuItem>
             <MenuItem>
               <a className="menu-item-a" href="/your-playlists">Playlists</a>
             </MenuItem>
