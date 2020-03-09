@@ -33,7 +33,7 @@ function Highlights(props) {
                                 id="vid1"
                                 className="azuremediaplayer amp-default-skin"
                                 controls
-                                autoPlay={false}
+                                autoPlay={true}
                                 width="640"
                                 height="400"
                                 poster="poster.jpg"

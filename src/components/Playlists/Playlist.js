@@ -16,29 +16,30 @@ function Playlist(props) {
     useEffect(() => {
         const url = `http://localhost:3001/playlists/get-playlist-videos/${props.playlistId}`
         axios.get(url)
+        
         .then(json => {
             const playlistVideos = Object.keys(json.data).map((playlistVideo) => {
                 let videoUrl = json.data[playlistVideo].source_id
-
-                return (<>
+                    return (<>
                 
-                    <div>
-                        <video
-                            id="vid1"
-                            className="azuremediaplayer amp-default-skin"
-                            controls
-                            autoPlay={false}
-                            width="640"
-                            height="400"
-                            onEnded={() => console.log('ended')}
-                            poster="poster.jpg"
-                        >
-                            <source src={videoUrl} />
-                        </video>
-                        <button className="upload-button" onClick={() => removeVideo(videoUrl)}>Remove from playlist</button>
-                    </div>
+                        <div>
+                            <video
+                                id="vid1"
+                                className="azuremediaplayer amp-default-skin"
+                                controls
+                                autoPlay={true}
+                                width="640"
+                                height="400"
+                                onEnded={() => console.log('ended')}
+                                poster="poster.jpg"
+                            >
+                                <source src={videoUrl} />
+                            </video>
+                            <button className="upload-button" onClick={() => removeVideo(videoUrl)}>Remove from playlist</button>
+                        </div>
+    
+                    </>)
 
-                </>)
             })
             setPlaylistData(playlistVideos)
         })

@@ -1,35 +1,40 @@
-import React, {Component} from "react";
-import ReactPlayer from 'react-player'
+import React, { useEffect } from "react";
+import {useRef} from 'react'
 
 // Component for testing Redux (Delete when ready)
-class Test extends Component {
-  constructor(props) {
-    super(props)
-    this.player = React.createRef()
+function Test() {
 
-    this.state = {
-      targetTimestamp: 12
-    }
-  }
+  let splitUrl = "https://astorageserver.blob.core.windows.net/video-storagea/23176022522508344-47c6ab69-ca8d-4be7-8962-8c5bdcf86d49.MP4#t=3,11"
+  let equalSplitUrl = splitUrl.split("=")[1]
+  let timeNumbers = equalSplitUrl.split(",")
+  console.log(timeNumbers)
 
-render() {
+  /*
+  const vidRef = useRef()
+  useEffect(() => {
+    const timer = setTimout(() => {
+      console.log(vidRef.current.duration)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [])
+  */
+
     return (<>
           <div>
             <h1>Testing</h1>
           </div>
           <div>
-            <ReactPlayer
-              url="https://astorageserver.blob.core.windows.net/video-storagea/9419186774465369-8911870163918805-8861367419101975-Cute Cat - 3092.mp4"
-              playing={true}
+            <video
+              //ref={vidRef}
+              src="https://astorageserver.blob.core.windows.net/video-storagea/23176022522508344-47c6ab69-ca8d-4be7-8962-8c5bdcf86d49.MP4#t=3,11"
               controls={true}
-              //ref={this.player.current.seekTo(this.targetTimestamp)}
+              autoPlay={true}
+              width="640"
+              height="400"
             />
           </div>
         </>);
-      };
 }
-
 
 export default Test;
 
-//http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest
