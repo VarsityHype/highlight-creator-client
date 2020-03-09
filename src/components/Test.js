@@ -1,43 +1,35 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, {Component} from "react";
+import ReactPlayer from 'react-player'
 
 // Component for testing Redux (Delete when ready)
-const Test = props => {
-  return (
-    <div>
-      <h1>Testing</h1>
-      <button
-        onClick={() => {
-          props.onTestSuccess();
-        }}
-      >
-        Button
-      </button>
-      <video
-        onLoadedMetadata={this.props.startTime}
-        id="vid1"
-        class="azuremediaplayer amp-default-skin"
-        autoplay
-        controls
-        width="640"
-        height="400"
-        poster="poster.jpg"
-        data-setup='{"nativeControlsForTouch": false}'
-        startInSec="10"
-      >
-        <source
-          src="http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest"
-          type="application/vnd.ms-sstr+xml"
-        />
-      </video>
-    </div>
-  );
-};
+class Test extends Component {
+  constructor(props) {
+    super(props)
+    this.player = React.createRef()
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTestSuccess: () => dispatch({ type: "TEST_SUCCESS" })
-  };
-};
+    this.state = {
+      targetTimestamp: 12
+    }
+  }
 
-export default connect(null, mapDispatchToProps)(Test);
+render() {
+    return (<>
+          <div>
+            <h1>Testing</h1>
+          </div>
+          <div>
+            <ReactPlayer
+              url="https://astorageserver.blob.core.windows.net/video-storagea/9419186774465369-8911870163918805-8861367419101975-Cute Cat - 3092.mp4"
+              playing={true}
+              controls={true}
+              //ref={this.player.current.seekTo(this.targetTimestamp)}
+            />
+          </div>
+        </>);
+      };
+}
+
+
+export default Test;
+
+//http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest
