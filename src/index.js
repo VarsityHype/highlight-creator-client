@@ -71,6 +71,7 @@ ReactDOM.render(
             <Route path="/playlist" component={Playlist} />
             <Route path="/your-highlights" component={Highlights} />
             <Route path="/highlight" component={SeeHighlight} />
+            <Route path="/profile" component={Profile} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>
