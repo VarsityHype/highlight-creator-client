@@ -166,7 +166,7 @@ export default function PrimarySearchAppBar() {
   return (
     <div className="top">
     <div className={classes.grow}>
-      <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
+      <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none'}}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <a className="menu-item-a" href="/">VarsityHype</a>
@@ -209,8 +209,22 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
+      <div className="header">
       {renderMobileMenu}
         {renderMenu}
+
+        <div className="title">
+            <img src= { require('./logo.png') } width="200"></img>
+            <div className="paragraph">
+                <h3>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore <br></br> et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco <br></br> laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                    irure dolor in reprehenderit in voluptate velit <br></br> esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</h3>
+
+            </div>
+        </div>
+      </div>
         
     </div>
     </div>

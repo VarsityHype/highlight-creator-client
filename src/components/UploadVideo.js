@@ -2,6 +2,12 @@ import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 
+const styles = theme => ({
+    multilineColor:{
+        color:'red'
+    }
+});
+
 class UploadVideo extends Component {
 
     constructor(props) {
@@ -55,26 +61,30 @@ class UploadVideo extends Component {
     render() {
 
         return(<>
+            <div className="section-1">
 
             <div>
                 <h1>Upload a Video</h1>
             </div>
             <form autoComplete="on">
-                <div>
+                <div className="url">
+                    <p>give a title to your video:</p>
                     <div className="textField">
                         <TextField id="outlined-basic" label="Title" variant="outlined" type="text" name="title" onChange={this.onHandleTitleDescriptionChange} />
                     </div>
+                    <p>add description:</p>
                     <div className="textField">
                         <TextField id="outlined-basic" label="Description" variant="outlined" type="text" name="description" onChange={this.onHandleTitleDescriptionChange} />
                     </div>
 
                     <div className="overlay">
                         <input type="file" onChange={this.onHandleChange} />
-                        <div className="upload-button">Video</div>
+                        <div className="file-button">Video</div>
                     </div>
                     <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
                 </div>
             </form>
+            </div>
 
 
         </>)

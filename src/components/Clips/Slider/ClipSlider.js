@@ -71,15 +71,20 @@ const ClipSlider = (props) => {
             type="text"
             onChange={handleClipTitle}
           />
+          <div className="buttons">
           <button 
           onClick={handleTrim}
+          className="upload-button"
           >
             Create Clip
             </button>
           
-          <button onClick={handleSave}>
+          <button onClick={handleSave}
+           className="upload-button">
             Export Clip
             </button>
+
+          </div>
         </div>
       </div>
     );
