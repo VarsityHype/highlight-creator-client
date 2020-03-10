@@ -178,6 +178,7 @@ class Clips extends React.Component {
             <h2>Your clips</h2>
 
             <button onClick={this.handleReturnToVideo} className="upload-button">
+
               Return to Main Video
             </button>
             <ClipsGallery

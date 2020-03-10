@@ -143,6 +143,7 @@ export default function Footer() {
       <AppBar
         position="static"
         style={{ background: "black", boxShadow: "none" }}
+
       >
         <Toolbar style={{ justifyContent: "space-between" }}>
           <Typography className={classes.title} variant="caption">
@@ -153,6 +154,7 @@ export default function Footer() {
           {/* <div className={classes.grow} /> */}
 
           <div>
+
           </div>
           <div className={classes.sectionDesktop}>
             <MenuItem>
