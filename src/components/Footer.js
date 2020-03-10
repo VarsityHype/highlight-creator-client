@@ -142,7 +142,8 @@ export default function Footer() {
     <div className={classes.grow} id="footer">
       <AppBar
         position="static"
-        style={{ background: "transparent", boxShadow: "none" }}
+        style={{ background: "black", boxShadow: "none" }}
+
       >
         <Toolbar style={{ justifyContent: "space-between" }}>
           <Typography className={classes.title} variant="caption">
@@ -153,9 +154,7 @@ export default function Footer() {
           {/* <div className={classes.grow} /> */}
 
           <div>
-            <a href="https://www.vype.com/">
-              <img style={{ maxHeight: "85px" }} src={logo} alt="vype logo" />
-            </a>
+
           </div>
           <div className={classes.sectionDesktop}>
             <MenuItem>

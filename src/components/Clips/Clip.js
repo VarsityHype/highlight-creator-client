@@ -127,10 +127,11 @@ class Clips extends React.Component {
 
   render() {
     return (
+      <div className="section-1">
       <div className="clip-component-container">
         <div className="flex-container">
           <div className="player-video-container">
-            <h1>{this.state.videoTitle}</h1>
+            <h2>{this.state.videoTitle}</h2>
             {this.state.clipPlaying ? (
               <ClipPreview
                 selectedClip={this.state.selectedClip}
@@ -143,8 +144,8 @@ class Clips extends React.Component {
                 className="azuremediaplayer amp-default-skin"
                 controls
                 autoPlay
-                width="640"
-                height="400"
+                width="900"
+                height="500"
                 poster="poster.jpg"
               >
                 <source src={this.state.videoUrl} />
@@ -155,7 +156,7 @@ class Clips extends React.Component {
                 <p className="add-to-playlist-p">Add to playlist:</p>
               </div>
               <PlaylistNames />
-              <button className="remove-video-button" onClick={() => this.deleteVideo(this.state.videoUrl)}>Remove from playlist</button>
+              <button className="upload-button" onClick={() => this.deleteVideo(this.state.videoUrl)}>Remove from playlist</button>
             </div>
             <br />
             <div>
@@ -174,9 +175,10 @@ class Clips extends React.Component {
           </div>
 
           <div className="clip-gallery-container">
-            <h1>Your clips</h1>
+            <h2>Your clips</h2>
 
-            <button onClick={this.handleReturnToVideo}>
+            <button onClick={this.handleReturnToVideo} className="upload-button">
+
               Return to Main Video
             </button>
             <ClipsGallery
@@ -189,6 +191,7 @@ class Clips extends React.Component {
             />
           </div>
         </div>
+      </div>
       </div>
     );
   }
