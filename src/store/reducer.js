@@ -6,7 +6,8 @@ const initialState = {
   highlightUrl: null,
   highlightTitle: null,
   highlightStart: null,
-  highlightEnd: null
+  highlightEnd: null,
+  array: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -34,6 +35,13 @@ const reducer = (state = initialState, action) => {
       highlightTitle: action.highlightTitle,
       highlightStart: action.highlightStart,
       highlightEnd: action.highlightEnd
+    }
+  }
+
+  if (action.type === 'URLS_SAVED') {
+    return {
+      ...state,
+      array: action.array
     }
   }
 
