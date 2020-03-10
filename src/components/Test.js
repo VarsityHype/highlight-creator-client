@@ -1,43 +1,40 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import {useRef} from 'react'
 
 // Component for testing Redux (Delete when ready)
-const Test = props => {
-  return (
-    <div>
-      <h1>Testing</h1>
-      <button
-        onClick={() => {
-          props.onTestSuccess();
-        }}
-      >
-        Button
-      </button>
-      <video
-        onLoadedMetadata={this.props.startTime}
-        id="vid1"
-        class="azuremediaplayer amp-default-skin"
-        autoplay
-        controls
-        width="640"
-        height="400"
-        poster="poster.jpg"
-        data-setup='{"nativeControlsForTouch": false}'
-        startInSec="10"
-      >
-        <source
-          src="http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest"
-          type="application/vnd.ms-sstr+xml"
-        />
-      </video>
-    </div>
-  );
-};
+function Test() {
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTestSuccess: () => dispatch({ type: "TEST_SUCCESS" })
-  };
-};
+  let splitUrl = "https://astorageserver.blob.core.windows.net/video-storagea/23176022522508344-47c6ab69-ca8d-4be7-8962-8c5bdcf86d49.MP4#t=3,11"
+  let equalSplitUrl = splitUrl.split("=")[1]
+  let timeNumbers = equalSplitUrl.split(",")
+  console.log(timeNumbers)
 
-export default connect(null, mapDispatchToProps)(Test);
+  /*
+  const vidRef = useRef()
+  useEffect(() => {
+    const timer = setTimout(() => {
+      console.log(vidRef.current.duration)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [])
+  */
+
+    return (<>
+          <div>
+            <h1>Testing</h1>
+          </div>
+          <div>
+            <video
+              //ref={vidRef}
+              src="https://astorageserver.blob.core.windows.net/video-storagea/23176022522508344-47c6ab69-ca8d-4be7-8962-8c5bdcf86d49.MP4#t=3,11"
+              controls={true}
+              autoPlay={true}
+              width="640"
+              height="400"
+            />
+          </div>
+        </>);
+}
+
+export default Test;
+

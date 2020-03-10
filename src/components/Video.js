@@ -1,47 +1,30 @@
 import React, {useEffect, useState} from 'react'
-import {connect} from 'react-redux'
-import PlaylistNames from './PlaylistNames'
 import axios from 'axios'
+import {connect} from 'react-redux'
 
 function Video(props) {
 
     const getUrlAndSeeVideo = (videoUrl, videoTitle) => {
+        localStorage.setItem('videoUrl', videoUrl)
+        localStorage.setItem('videoTitle', videoTitle)
         props.getUrl(videoUrl, videoTitle)
         props.history.push("/clips")
     }
 
-    const addToPlaylist = () => {
-        const url = ''    
-        axios.post(url, {
-
-        })
-    }
-
     const [videoData, setVideoData] = useState([])
     
-
-    useEffect((props) => {
-        let token = localStorage.jwt
-        fetch('http://localhost:3001/video/', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              "Authorization": `Bearer ${token}`
-            },
-        })
-        .then(response => response.json())
+    useEffect(() => {
+        axios.get('http://localhost:3001/video/')
         .then(json => {
-            const videos = json.map((video) => {
-
-                let videoUrl = video.azure_url
-                let videoTitle = video.title
+            const videos = Object.keys(json.data).map((video) => {
+                let videoUrl = json.data[video].azure_url
+                let videoTitle = json.data[video].title
                 
                 return(<>
-                        <div className="container video-container" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
-                        
-                            
+
+                        <div className="container video-container">        
                                 <div className="video-div-inner">
-                                    <div className="vidvid">
+                                    <div className="vidvid" onClick={() => getUrlAndSeeVideo(videoUrl, videoTitle)}>
                                         <video
                                             id="vid1"
                                             className="azuremediaplayer amp-default-skin"
@@ -62,9 +45,6 @@ function Video(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <PlaylistNames />
-
-                                <button className="upload-button" onClick={() => addToPlaylist()}>Add to playlist</button>
 
                             </div>
 
@@ -75,19 +55,14 @@ function Video(props) {
     }, [])  
 
     return (<>
-        <div className="title">
-            <img src= { require('./logo.png') } width="200"></img>
-            <div className="paragraph">
-                <h3>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore <br></br> et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco <br></br> laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit <br></br> esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</h3>
-
+    
+        <div className="section-1">
+            <div className="section-title">
+                <h1> your videos</h1>
             </div>
-        </div>
-        <div className="test">
-            {videoData}
+            <div className="test">
+                {videoData}
+            </div>
         </div>
 
     </>)

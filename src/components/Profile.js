@@ -1,7 +1,7 @@
 // src/components/Profile.js
 
 import React, { Fragment } from "react";
-import PlaylistNames from "./PlaylistNames"
+import PlaylistNames from "./Playlists/PlaylistNames"
 import { useAuth0 } from "../react-auth0-spa";
 
 const Profile = () => {

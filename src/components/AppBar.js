@@ -137,14 +137,6 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -157,7 +149,13 @@ export default function PrimarySearchAppBar() {
         <p>Profile</p>
       </MenuItem>
       <MenuItem>
-        <a className="menu-item-a-mobile" href="/playlists">Playlists</a>
+        <a className="menu-item-a-mobile" href="/your-highlights">Highlights</a>
+      </MenuItem>
+      <MenuItem>
+        <a className="menu-item-a-mobile" href="/your-playlists">Playlists</a>
+      </MenuItem>
+      <MenuItem>
+        <a className="menu-item-a-mobile" href="/video">Videos</a>
       </MenuItem>
       <MenuItem>
         <a className="menu-item-a-mobile" href="/upload">Upload</a>
@@ -166,9 +164,9 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div classname="top">
+    <div className="top">
     <div className={classes.grow}>
-      <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
+      <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none'}}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <a className="menu-item-a" href="/">VarsityHype</a>
@@ -176,7 +174,10 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <MenuItem>
-              <a className="menu-item-a" href="/playlists">Playlists</a>
+              <a className="menu-item-a" href="/your-highlights">Highlights</a>
+            </MenuItem>
+            <MenuItem>
+              <a className="menu-item-a" href="/your-playlists">Playlists</a>
             </MenuItem>
             <MenuItem>
               <a className="menu-item-a" href="/video">Videos</a>
@@ -208,8 +209,22 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
+      <div className="header">
       {renderMobileMenu}
         {renderMenu}
+
+        <div className="title">
+            <img src= { require('./logo.png') } width="200"></img>
+            <div className="paragraph">
+                <h3>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore <br></br> et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco <br></br> laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                    irure dolor in reprehenderit in voluptate velit <br></br> esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</h3>
+
+            </div>
+        </div>
+      </div>
         
     </div>
     </div>

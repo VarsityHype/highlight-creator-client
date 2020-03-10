@@ -5,22 +5,14 @@
     background-color: rgba(5, 5, 5, 0.2);
 
 }
-.title{
-    background-color: rgba(5, 5, 5, 0.5);
-    background-size: 100%;
-    text-align: center;
-    font-size: 2vmin;
-    border-radius: 1em;
-    width: 100%;
-}
 
 .paragraph{
-    background-color: rgba(5, 5, 5, 0.2);
+    padding-top: 50px;
     width: auto;
 
 }
 .video-div-inner {
-    margin: 0rem;    
+    margin: 1rem;    
 }
 
 .video-page-video {
@@ -30,8 +22,7 @@
 
 .title-description-div {
     color: rgb(255, 255, 255);
-    font: 14px/19px  "Helvetica", "Arial", sans-serif;
-    font-size: 1.5vmin;
+    font-size: 1vmin;
 
 }
 .test{
@@ -41,10 +32,10 @@
 }
 
 .test>div {
+    border-bottom: solid black;
     text-align: center;
-    border-radius: 1em;
-    box-sizing:border-box;
-    margin: 20px;
+    padding-left: px;
+    margin: 10px;
     padding: 10px;
   }
 

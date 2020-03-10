@@ -1,0 +1,18 @@
+.playlist-titles-div {
+    background-color: black;
+    opacity: 80%;
+    padding: 0rem;
+}
+
+.create-playlist-div {
+    background-color: whitesmoke;
+    padding: 1rem;
+}
+
+.playlist-div {
+    cursor: pointer;
+}
+
+.remove-playlist-button {
+    cursor: pointer;
+}

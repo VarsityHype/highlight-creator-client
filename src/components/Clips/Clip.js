@@ -1,12 +1,10 @@
 import React from "react";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 import ClipSlider from "./Slider/ClipSlider"
-import PlayArrow from "@material-ui/icons/PlayArrow"
-import Pause from "@material-ui/icons/Pause"
+import PlaylistNames from "../Playlists/PlaylistNames"
 import axios from "axios";
-import {convert, toSeconds, format} from '../../utils/helpers'
 import "../../css/Clip.css";
 
 class Clips extends React.Component {
@@ -31,13 +29,12 @@ class Clips extends React.Component {
     this.videoRef = React.createRef();
   }
 
-
-  handleClipTitle = (title) => {
+  handleClipTitle = title => {
     this.setState({
       ...this.state,
       clipTitle: title
     });
-  }
+  };
 
   // Randomly generates an id
   uuidv4 = () => {
@@ -61,21 +58,13 @@ class Clips extends React.Component {
     this.setState(
       {
         ...this.state,
-        clipsList: this.state.clipsList.concat(newClip),
+        clipsList: this.state.clipsList.concat(newClip)
       },
       () => {
         console.log(this.state.clipsList);
       }
     );
 
-    const url = "http://localhost:3001/clips/store_clip/"
-    
-    axios.post(url, {
-      start_timestamp: this.state.startTime,
-      end_timestamp: this.state.endTime,
-      clip_title: this.state.clipTitle,
-      azure_url: this.state.videoUrl,
-    })
   };
 
   // Selects a clip to display in the Clip component
@@ -90,8 +79,8 @@ class Clips extends React.Component {
   handleReturnToVideo = () => {
     this.setState({
       clipPlaying: false
-    })
-  }
+    });
+  };
 
   // Finds a clip by its ID and removes it from clips gallery
   handleDeleteClip = clip => {
@@ -113,26 +102,36 @@ class Clips extends React.Component {
 
   // Sends the list of clips to database
   handleSave = () => {
-    axios.post("http://localhost:3001/saveClip", {
+    const url = "http://localhost:3001/clips/store_clip/";
+    axios.post(url, {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
     });
   };
 
   // Loads the video's entire duration for clipping
-  componentDidMount = () =>{
-    this.videoRef.current.addEventListener('loadedmetadata', () => {
+  componentDidMount = () => {
+    this.videoRef.current.addEventListener("loadedmetadata", () => {
       this.setState({
         duration: this.videoRef.current.duration
-      })
+      });
+    });
+  };
+
+  deleteVideo = (videoUrl) => {
+    const url = 'http://localhost:3001/video/delete-video'
+    axios.post(url, {
+      azure_url: videoUrl
     })
   }
+
   render() {
     return (
+      <div className="section-1">
       <div className="clip-component-container">
         <div className="flex-container">
           <div className="player-video-container">
-            <h1>{this.state.videoTitle}</h1>
+            <h2>{this.state.videoTitle}</h2>
             {this.state.clipPlaying ? (
               <ClipPreview
                 selectedClip={this.state.selectedClip}
@@ -145,32 +144,42 @@ class Clips extends React.Component {
                 className="azuremediaplayer amp-default-skin"
                 controls
                 autoPlay
-                width="640"
-                height="400"
+                width="900"
+                height="500"
                 poster="poster.jpg"
               >
                 <source src={this.state.videoUrl} />
               </video>
             )}
+            <div className="playlist-names-div">
+              <div className="remove-video-div">
+                <p className="add-to-playlist-p">Add to playlist:</p>
+              </div>
+              <PlaylistNames />
+              <button className="upload-button" onClick={() => this.deleteVideo(this.state.videoUrl)}>Remove from playlist</button>
+            </div>
             <br />
             <div>
-              {this.state.duration ? 
-              this.state.clipPlaying ? null :
-              (
-                <ClipSlider
-                  duration={this.state.duration}
-                  handleSliderClip={this.handleSliderClip}
-                  handleClipTitle={this.handleClipTitle}
-                  handleTrim={this.handleTrim}
-                  handleSave={this.handleSave}
-                />
+              {this.state.duration ? (
+                this.state.clipPlaying ? null : (
+                  <ClipSlider
+                    duration={this.state.duration}
+                    handleSliderClip={this.handleSliderClip}
+                    handleClipTitle={this.handleClipTitle}
+                    handleTrim={this.handleTrim}
+                    handleSave={this.handleSave}
+                  />
+                )
               ) : null}
             </div>
           </div>
 
           <div className="clip-gallery-container">
-            <h1>Your clips</h1>
-            <button className="upload-button" onClick={this.handleReturnToVideo}>Return to Main Video</button>
+            <h2>Your clips</h2>
+
+            <button onClick={this.handleReturnToVideo} className="upload-button">
+              Return to Main Video
+            </button>
             <ClipsGallery
               clipsList={this.state.clipsList}
               url={this.state.videoUrl}
@@ -182,15 +191,18 @@ class Clips extends React.Component {
           </div>
         </div>
       </div>
+      </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    videoUrl: state.videoUrl,
-    videoTitle: state.videoTitle
+
+    videoUrl: state.videoUrl ?? localStorage.getItem("videoUrl"),
+    videoTitle: state.videoTitle ?? localStorage.getItem("videoTitle")
   }
 }
+
 
 export default connect(mapStateToProps)(Clips);

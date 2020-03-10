@@ -1,9 +1,11 @@
 .flex-container {
   display: flex;
+  box-shadow:  10px 10px 10px 10px  rgba(0, 0, 0, 0.158);
 }
 
 .player-video-container {
-  margin-right: 1rem;
+  margin-left: 1rem;
+  padding-right: 20px;
 }
 
 .play-arrow-icon {
@@ -12,6 +14,7 @@
 }
 
 .clip-controls-div {
+  text-align: center;
   background-color: transparent;
   margin: 1rem;
   padding: 1rem;
@@ -19,4 +22,20 @@
 
 .video-time-header {
   color:#fff;
+}
+
+.playlist-names-div {
+  background-color: transparent;
+}
+
+.add-to-playlist-p {
+  color: rgb(255, 255, 255);
+}
+
+.remove-video-div {
+  display: inline;
+}
+
+.remove-video-button {
+  margin-left: 5rem;
 }

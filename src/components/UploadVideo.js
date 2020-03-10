@@ -2,6 +2,12 @@ import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 
+const styles = theme => ({
+    multilineColor:{
+        color:'red'
+    }
+});
+
 class UploadVideo extends Component {
 
     constructor(props) {
@@ -19,7 +25,6 @@ class UploadVideo extends Component {
             selectedFile: e.target.files[0],
         })
     }
-
 
     onHandleTitleDescriptionChange = (e) => {
         this.setState({
@@ -40,7 +45,6 @@ class UploadVideo extends Component {
         })
         .then(res => {
             let info = JSON.parse(localStorage.user)
-            let token = localStorage.jwt
             let uploader_id = info.sub
             let video = {
                 uploader_id: `${uploader_id}`,
@@ -49,14 +53,7 @@ class UploadVideo extends Component {
                 description: description,
                 thumbnail: `${this.state.thumbnail}`
                 };
-                fetch('http://localhost:3001/upload/uploaded', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
-                  },
-                  body: JSON.stringify(video)
-                }).then(response => response.json())
+                axios.post('http://localhost:3001/upload/uploaded', video).then(response => response.json())
             
         })
     }
@@ -64,26 +61,30 @@ class UploadVideo extends Component {
     render() {
 
         return(<>
+            <div className="section-1">
 
             <div>
                 <h1>Upload a Video</h1>
             </div>
             <form autoComplete="on">
-                <div>
+                <div className="url">
+                    <p>give a title to your video:</p>
                     <div className="textField">
-                        <TextField id="outlined-basic"  label="Title" variant="outlined" type="text" name="title"  onChange={this.onHandleTitleDescriptionChange} />
+                        <TextField id="outlined-basic" label="Title" variant="outlined" type="text" name="title" onChange={this.onHandleTitleDescriptionChange} />
                     </div>
+                    <p>add description:</p>
                     <div className="textField">
                         <TextField id="outlined-basic" label="Description" variant="outlined" type="text" name="description" onChange={this.onHandleTitleDescriptionChange} />
                     </div>
 
                     <div className="overlay">
                         <input type="file" onChange={this.onHandleChange} />
-                        <div className="upload-button">Video</div>
+                        <div className="file-button">Video</div>
                     </div>
                     <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
                 </div>
             </form>
+            </div>
 
 
         </>)

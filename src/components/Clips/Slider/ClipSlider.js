@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { msToTime } from "../../../utils/helpers";
-import PlayArrow from "@material-ui/icons/PlayArrow";
-import Pause from "@material-ui/icons/Pause";
 import "../../../css/Clip.css";
 
 const color = {
@@ -73,15 +71,20 @@ const ClipSlider = (props) => {
             type="text"
             onChange={handleClipTitle}
           />
+          <div className="buttons">
           <button 
           onClick={handleTrim}
+          className="upload-button"
           >
             Create Clip
             </button>
           
-          <button onClick={handleSave}>
+          <button onClick={handleSave}
+           className="upload-button">
             Export Clip
             </button>
+
+          </div>
         </div>
       </div>
     );
