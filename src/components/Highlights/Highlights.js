@@ -13,6 +13,14 @@ function Highlights(props) {
         props.history.push('/highlight')
     }
 
+    const deleteHighlight = (highlightId) => {
+        const url = 'http://localhost:3001/clips/delete-clip/'
+        axios.post(url, {
+            id: highlightId
+        })
+        .then(window.location.href = '/your-highlights')
+    }
+
     const [clipsData, setClipsData] = useState([])
 
     useEffect(() => {
@@ -24,6 +32,7 @@ function Highlights(props) {
                 let end = json.data[clip].end_timestamp
                 let title = json.data[clip].title
                 let highlightUrl = json.data[clip].source_video_id
+                let highlightId = json.data[clip].id
             
                 return (<>
                 
@@ -41,6 +50,9 @@ function Highlights(props) {
                                 <source src={highlightUrl} />
                             </video>
                             <button className="upload-button" onClick={() => getClipAndSeeHighlight(highlightUrl, title, start, end)}>View highlight</button>
+                        </div>
+                        <div>
+                            <button onClick={() => deleteHighlight(highlightId)}>Delete highlight</button>
                         </div>
                 
                 </>)
