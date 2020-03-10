@@ -120,7 +120,9 @@ export default function PrimarySearchAppBar() {
       </div>}
       {isAuthenticated && <div>
         <MenuItem onClick={() => logout()}>Log out</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>
+          <a className="menu-item-a-mobile" href="/profile">Profile</a>
+        </MenuItem>
         <MenuItem component={Link} to="/profile">My account</MenuItem>
       </div>}
     </Menu>
