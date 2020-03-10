@@ -102,7 +102,7 @@ class Clips extends React.Component {
 
   // Sends the list of clips to database
   handleSave = () => {
-    const url = "http://localhost:3001/clips/store_clip/";
+    const url = "https://varsityhype-highlightcreator-server.azurewebsites.net/clips/store_clip/";
     axios.post(url, {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
@@ -119,7 +119,7 @@ class Clips extends React.Component {
   };
 
   deleteVideo = (videoUrl) => {
-    const url = 'http://localhost:3001/video/delete-video'
+    const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/video/delete-video'
     axios.post(url, {
       azure_url: videoUrl
     })

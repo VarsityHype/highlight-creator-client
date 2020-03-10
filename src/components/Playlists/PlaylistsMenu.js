@@ -17,7 +17,7 @@ function PlaylistsMenu(props) {
     }
 
     const createPlaylist = () => {
-        const url = 'http://localhost:3001/playlists/create-playlist'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/create-playlist'
         axios.post(url, {
             newPlaylist
         })
@@ -26,7 +26,7 @@ function PlaylistsMenu(props) {
 
     // delete playlist
     const deletePlaylist = (playlistId) => {
-        const url = 'http://localhost:3001/playlists/delete-playlist'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/delete-playlist'
         axios.post(url, {
             id: playlistId
         })
@@ -44,7 +44,7 @@ function PlaylistsMenu(props) {
     const [playlistData, setPlaylistData] = useState([])
 
     useEffect(() => {
-        const url = 'http://localhost:3001/playlists/get-playlists/'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/get-playlists/'
         axios.get(url)
         .then(json => {
             const playlists = Object.keys(json.data).map((playlist) => {

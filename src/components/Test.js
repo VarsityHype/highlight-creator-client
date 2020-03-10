@@ -35,7 +35,7 @@ function Test(props) {
   const [test, setTest] = useState([])
 
   useEffect(() => {
-    const url2 = 'http://localhost:3001/clips/view-clips/'
+    const url2 = 'https://varsityhype-highlightcreator-server.azurewebsites.net/clips/view-clips/'
     axios.get(url2)
     .then(json => {
       const testing = Object.keys(json.data).map((clip) => {

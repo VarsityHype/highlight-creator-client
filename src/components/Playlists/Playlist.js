@@ -5,7 +5,7 @@ import axios from 'axios'
 function Playlist(props) {
 
     const removeVideo = (videoUrl) => {
-        const url = 'http://localhost:3001/playlists/remove-from-playlist'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/remove-from-playlist'
         axios.post(url, {
             source_id: videoUrl
         })
@@ -14,7 +14,7 @@ function Playlist(props) {
     const [playlistData, setPlaylistData] = useState([])
 
     useEffect(() => {
-        const url = `http://localhost:3001/playlists/get-playlist-videos/${props.playlistId}`
+        const url = `https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/get-playlist-videos/${props.playlistId}`
         axios.get(url)
         
         .then(json => {

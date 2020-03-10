@@ -8,7 +8,7 @@ import axios from 'axios'
 function PlaylistNames(props) {
 
     const addVideoToPlaylist = (videoUrl, playlist_reference_id) => {
-        const url = 'http://localhost:3001/playlists/add-to-playlist/'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/add-to-playlist/'
         axios.post(url, {
             playlist_reference_id: playlist_reference_id,
             source_id: videoUrl,
@@ -19,7 +19,7 @@ function PlaylistNames(props) {
     const [playlistData, setPlaylistData] = useState([])
 
     useEffect(() => {
-        const url = 'http://localhost:3001/playlists/get-playlists/'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/playlists/get-playlists/'
         axios.get(url)
         .then(json => {
             const playlists = Object.keys(json.data).map((playlist) => {

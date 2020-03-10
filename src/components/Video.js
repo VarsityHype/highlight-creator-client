@@ -14,7 +14,7 @@ function Video(props) {
     const [videoData, setVideoData] = useState([])
     
     useEffect(() => {
-        axios.get('http://localhost:3001/video/')
+        axios.get('https://varsityhype-highlightcreator-server.azurewebsites.net/video/')
         .then(json => {
             const videos = Object.keys(json.data).map((video) => {
                 let videoUrl = json.data[video].azure_url

@@ -14,7 +14,7 @@ function Highlights(props) {
     }
 
     const deleteHighlight = (highlightId) => {
-        const url = 'http://localhost:3001/clips/delete-clip/'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/clips/delete-clip/'
         axios.post(url, {
             id: highlightId
         })
@@ -24,7 +24,7 @@ function Highlights(props) {
     const [clipsData, setClipsData] = useState([])
 
     useEffect(() => {
-        const url = 'http://localhost:3001/clips/view-clips/'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/clips/view-clips/'
         axios.get(url)
         .then(json => {
             const clips = Object.keys(json.data).map((clip) => {

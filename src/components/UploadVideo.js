@@ -37,7 +37,7 @@ class UploadVideo extends Component {
         const title = this.state.title
         const token = localStorage.jwt
         const description = this.state.description
-        const url = 'http://localhost:3001/upload/'
+        const url = 'https://varsityhype-highlightcreator-server.azurewebsites.net/upload/'
         const data = new FormData()
         data.append('image', this.state.selectedFile)
         axios.post(url, data, {
@@ -53,7 +53,7 @@ class UploadVideo extends Component {
                 description: description,
                 thumbnail: `${this.state.thumbnail}`
                 };
-                axios.post('http://localhost:3001/upload/uploaded', video).then(response => response.json())
+                axios.post('https://varsityhype-highlightcreator-server.azurewebsites.net/upload/uploaded', video).then(response => response.json())
             
         })
     }
