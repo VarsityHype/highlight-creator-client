@@ -4,6 +4,7 @@ import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 import ClipSlider from "./Slider/ClipSlider"
 import PlaylistNames from "../Playlists/PlaylistNames"
+import Alert from "material-ui/lab/Alert"
 import axios from "axios";
 import "../../css/Clip.css";
 
@@ -22,7 +23,8 @@ class Clips extends React.Component {
       values: null,
       duration: null,
       clipTitle: "",
-      clipPlaying: false
+      clipPlaying: false,
+      successMessage: false
     };
 
     //refs
@@ -107,6 +109,7 @@ class Clips extends React.Component {
       sourceVideo: this.state.videoUrl,
       clipsList: this.state.clipsList
     });
+    this.setState({successMessage: true})
   };
 
   // Loads the video's entire duration for clipping
@@ -171,6 +174,7 @@ class Clips extends React.Component {
                   />
                 )
               ) : null}
+              {this.state.successMessage ? <Alert severity="success">Highlight saved!</Alert> : null}
             </div>
           </div>
 
