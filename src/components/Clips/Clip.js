@@ -126,6 +126,7 @@ class Clips extends React.Component {
     axios.post(url, {
       azure_url: videoUrl
     })
+    window.location.href = "/video"
   }
 
   render() {
