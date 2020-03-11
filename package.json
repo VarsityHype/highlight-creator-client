@@ -21,6 +21,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
+    "surge": "^0.21.3",
     "video-react": "^0.14.1"
   },
   "scripts": {
