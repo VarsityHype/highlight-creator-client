@@ -4,7 +4,7 @@ import ClipPreview from "./ClipPreview";
 import ClipsGallery from "./ClipsGallery";
 import ClipSlider from "./Slider/ClipSlider"
 import PlaylistNames from "../Playlists/PlaylistNames"
-import Alert from "material-ui/lab/Alert"
+import Alert from "@material-ui/lab/Alert"
 import axios from "axios";
 import "../../css/Clip.css";
 
@@ -159,7 +159,7 @@ class Clips extends React.Component {
                 <p className="add-to-playlist-p">Add to playlist:</p>
               </div>
               <PlaylistNames />
-              <button className="upload-button" onClick={() => this.deleteVideo(this.state.videoUrl)}>Remove from playlist</button>
+              <button onClick={() => this.deleteVideo(this.state.videoUrl)}>Delete video</button>
             </div>
             <br />
             <div>

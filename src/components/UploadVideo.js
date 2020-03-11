@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField';
+import Alert from '@material-ui/lab/Alert'
 import axios from 'axios'
 
 const styles = theme => ({
@@ -16,7 +17,8 @@ class UploadVideo extends Component {
             selectedFile: null,
             thumbnail: null,
             title: '',
-            description: ''
+            description: '',
+            successMessage: false
         } 
     }
 
@@ -56,6 +58,7 @@ class UploadVideo extends Component {
                 axios.post('https://varsityhype-highlightcreator-server.azurewebsites.net/upload/uploaded', video).then(response => response.json())
             
         })
+        this.setState({successMessage: true})
     }
 
     render() {
@@ -84,6 +87,7 @@ class UploadVideo extends Component {
                     <button className="upload-button" type="button" onClick={this.onHandleFileUpload}>Upload</button>
                 </div>
             </form>
+            {this.state.successMessage ? <Alert severity="success">Video uploaded!</Alert> : null}
             </div>
 
 
