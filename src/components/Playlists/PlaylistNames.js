@@ -37,12 +37,14 @@ function PlaylistNames(props) {
     }, [])
 
     return (<>
-    
+            <div className="upload-grid">
             <FormControl>
                 <Select labelId="add-to-playlist">
                     {playlistData}
                 </Select>
             </FormControl>
+            </div>
+    
     
     </>)
 

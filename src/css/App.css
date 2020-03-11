@@ -12,14 +12,20 @@ body{
     display: none;
 }
 
+.upload-grid{
+    background-color: rgba(255, 255, 255, 0.274);
+    font-size: 3vmin;
+    padding: 50px;
+    border-radius: 2vmin;
+    box-shadow: 0px 30px 20px rgba(0, 0, 0, 0.733);
+}
+
 .section-1{
     background: linear-gradient(rgb(0, 0, 0)), transparent;
     font-size: 3vmin;
-        padding-right: 15px;
+    padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    box-shadow: 1px 0px 20px 20px rgba(0, 0, 0, 0.158);
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.158);
 }
 
 .section-title{
@@ -31,8 +37,7 @@ body{
     background-size: 100%;
     text-align: center;
     background-repeat: no-repeat;
-    padding-bottom: 400px;
-    margin-bottom: 50px;
+    padding-bottom: 80px;
     box-sizing: border-box;
     
 }
@@ -77,13 +82,23 @@ input[type="file"] {
     border: 0.2em solid rgba(1, 177, 201, 0.849);
     color: rgba(1, 177, 201, 0.849);
     cursor: pointer;
-    font-size: 1.5vmin;
+    font-size: 2vmin;
     padding: 0.7em 1.5em;
     text-transform: uppercase;
     transition: all 0.25s ease;
     margin-top:0px;
 
     margin-left: 20px;
+}
+
+.upload-button:hover {
+    background: rgba(1, 177, 201, 0.849);
+    color: rgb(233, 233, 233);
+  }
+
+.file-button:hover {
+    background: rgba(1, 177, 201, 0.849);
+    color: rgb(233, 233, 233);
 }
 
 .file-button{

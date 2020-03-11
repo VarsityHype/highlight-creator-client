@@ -21,7 +21,7 @@ function Playlist(props) {
             const playlistVideos = Object.keys(json.data).map((playlistVideo) => {
                 let videoUrl = json.data[playlistVideo].source_id
                     return (<>
-                
+                    <div className="upload-grid">
                         <div>
                             <video
                                 id="vid1"
@@ -36,6 +36,7 @@ function Playlist(props) {
                                 <source src={videoUrl} />
                             </video>
                             <button className="upload-button" onClick={() => removeVideo(videoUrl)}>Remove from playlist</button>
+                        </div>
                         </div>
     
                     </>)

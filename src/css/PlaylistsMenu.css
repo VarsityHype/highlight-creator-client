@@ -1,12 +1,15 @@
 .playlist-titles-div {
-    background-color: black;
+    background-color: transparent;
     opacity: 80%;
     padding: 0rem;
 }
 
 .create-playlist-div {
-    background-color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0.808);
+    border-radius: 2vmin;
+    box-shadow: 0px 25px 25px 25px rgba(0, 0, 0, 0.541);
     padding: 1rem;
+    margin-top: 4rem;
 }
 
 .playlist-div {

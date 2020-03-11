@@ -61,11 +61,9 @@ class UploadVideo extends Component {
     render() {
 
         return(<>
-            <div className="section-1">
+            <div className="upload-grid">
 
-            <div>
                 <h1>Upload a Video</h1>
-            </div>
             <form autoComplete="on">
                 <div className="url">
                     <p>give a title to your video:</p>

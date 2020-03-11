@@ -6,7 +6,7 @@ function SeeHighlight(props) {
 
     return(<>
     
-            <div>
+            <div className="upload-grid">
                 <h1>{props.hightlightTitle}</h1>
                 <p>starts at {props.hightlightStart}, ends at {props.hightlightEnd}</p>
                 <video

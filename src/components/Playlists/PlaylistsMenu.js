@@ -69,13 +69,14 @@ function PlaylistsMenu(props) {
     }, [])
 
     return (<>
-    
+        <div className="upload-grid">
         <h1>Your Playlists</h1>
         {playlistData}
         <div className="create-playlist-div">
             <TextField id="outlined-basic" label="title" variant="outlined" name="title" placeholder="playlist title" onChange={handleChange} />
             <TextField id="outlined-basic" label="description" variant="outlined" name="description" placeholder="playlist description" onChange={handleChange} />
             <button className="upload-button" onClick={() => createPlaylist()}>Create a playlist</button>
+        </div>
         </div>
 
     </>)
